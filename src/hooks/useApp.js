@@ -15,7 +15,7 @@ const useApp = () => {
   const [state, setState] = useState(initial);
 
   const addClock = ({ title, timeZone, difference }) => {
-    const newClock = { id: MATH.random() + '-' + MATH.random(), title, timeZone, difference };
+    const newClock = { id: Math.random() + '-' + Math.random(), title, timeZone, difference };
 
     setState(prev => ({
       ...prev, 
