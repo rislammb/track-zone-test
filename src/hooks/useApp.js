@@ -52,8 +52,8 @@ const useApp = () => {
     if (index > -1) {
       oldState.clocks[index] = {id, ...newClock}
     }
-    oldStats.open = false;
-    oldStats.openedClock = null;
+    oldState.open = false;
+    oldState.openedClock = null;
 
     setState(oldState)
   };
