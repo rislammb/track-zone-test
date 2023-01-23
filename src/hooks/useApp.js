@@ -97,7 +97,7 @@ const useApp = () => {
   return {
     state, 
     addClock, 
-    editUserClick, 
+    editUserClock, 
     editClock, 
     deleteClock, 
     openModal,
