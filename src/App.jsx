@@ -1,4 +1,4 @@
-import useApp from '../hooks/useApp';
+import useApp from './hooks/useApp';
 import "./styles.css";
 
 export default function App() {
