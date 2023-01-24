@@ -50,7 +50,7 @@ const useApp = () => {
     const index = oldState.clocks.findIndex(clock => clock.id === id);
 
     if (index > -1) {
-alert(JSIN.stringify({ id, ...newClock }))
+alert(JSON.stringify({ id, ...newClock }))
       oldState.clocks[index] = { id, ...newClock };
     }
     oldState.open = false;
