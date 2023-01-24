@@ -14,7 +14,7 @@ export default function App() {
   return (
     <div className="app">
       <Title>Track Zone App</Title>
-      <Flex>
+      <Flex ai={'center'}>
         <Clock adminClock={state.adminClock} openModal={openModal} />
         <Button onClick={openModal}>Add Clock</Button>
       </Flex>
