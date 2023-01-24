@@ -3,7 +3,7 @@ import Title from '../ui/Title';
 import Text from '../ui/Text';
 import Button from '../ui/Button';
 
-const Clock = ({ adminClock, clock, openModal, deleteClock }) = > {
+const Clock = ({ adminClock, clock, openModal, deleteClock }) => {
   return clock ? (
     <Card>
       <Title size={'lg'}>Clock</Title>
