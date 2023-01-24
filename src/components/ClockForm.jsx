@@ -44,9 +44,11 @@ const ClockForm = ({ addClock, editAdminClock, editClock, closeModal, openedCloc
 
       <form onSubmit={e => handleSubmit(e, submit)}>
         <input value={state.title.value} name='title' onChange={handleChange} />
+        {state.title.error && <span>{state.title.error}</span>}
         <input value={state.timeZone.value} name='timeZone' onChange={handleChange} />
+        {state.timeZone.error && <span>{state.timeZone.error}</span>}
         <input value={state.difference.value} name='difference' onChange={handleChange} />
-
+        {state.difference.error && <span>{state.difference.error}</span>}
         <button type='submit'>
           { openedClock ? 'Edit Clock' : 'Add Clock' }
         </button>
