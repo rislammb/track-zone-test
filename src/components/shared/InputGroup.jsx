@@ -11,10 +11,10 @@ const Group = styled.div`
   border: 1px solid #aaa; 
 `; 
 
-const InputGroup = ({ name, label, value, error, handleChange, handleFocus, handleBlur }) => (
+const InputGroup = ({ name, label, value, error, onChange, onFocus, onBlur }) => (
   <Group>
-    <Label htmlFor={name}><Label>
-    <Input value={value} name={name} id={name} handleChange={handleChange} handleFocus={handleFocus} handleBlur={handleBlur} />
+    <Label htmlFor={name}>{label}<Label>
+    <Input value={value} name={name} id={name} onChange={onChange} onFocus={onFocus} onBlur={onBlur} />
     {error && <Text size={'sm'} color={'warning'}>{error}</Text>}
   </Group>
 );
