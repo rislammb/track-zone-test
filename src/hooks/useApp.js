@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 const initial = {
   adminClock: {
@@ -50,7 +50,7 @@ const useApp = () => {
     const index = oldState.clocks.findIndex(clock => clock.id === id);
 
     if (index > -1) {
-      oldState.clocks[index] = {id, ...newClock}
+      oldState.clocks[index] = { id, ...newClock };
     }
     oldState.open = false;
     oldState.openedClock = null;
@@ -87,10 +87,11 @@ const useApp = () => {
     setState(oldState)
   };
 
-  const closeModal = ({ title, timeZone, difference }) => {
+  const closeModal = () => {
     setState(prev => ({
       ...prev,
-      open: false
+      open: false,
+      openedClock: null
     }))
   };
 
