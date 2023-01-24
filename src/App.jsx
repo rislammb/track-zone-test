@@ -19,7 +19,7 @@ export default function App() {
       </div>
 
       { state.clocks.length > 0 && state.clocks.map(clock => 
-         <Clock key={clock.id} adminClock={state.adminClock} openModal={openModal} deleteClock={deleteClock} />
+         <Clock key={clock.id} adminClock={state.adminClock} clock={clock} openModal={openModal} deleteClock={deleteClock} />
       )}
 
       { state.open && <ClockForm addClock={addClock} editAdminClock={editAdminClock} editClock={editClock} closeModal={closeModal} openedClock={state.openedClock}  /> }    
