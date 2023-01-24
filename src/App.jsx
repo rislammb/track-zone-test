@@ -1,4 +1,5 @@
 import useApp from './hooks/useApp';
+import ClockForm from './components/ClockForm';
 import "./styles.css";
 
 export default function App() {
@@ -29,16 +30,7 @@ export default function App() {
         </div>
       ))}
 
-      { state.open && (
-        <div>
-          <button onClick={closeModal}>Close</button>
-          <form onSubmit={ handleSubmit }>
-            <input />
-            <input />
-            <button>ADD</button>
-          </form>
-        </div>
-      )}    
+      { state.open && ClockForm }    
     </div>
   );
 }
