@@ -6,10 +6,6 @@ import Text from '../../ui/Text';
 const Group = styled.div`
   display: flex; 
   flex-direction: column; 
-  gap: 8px;
-  border-radius: 4px; 
-  padding: 8px; 
-  border: 1px solid #aaa; 
 `; 
 
 const InputGroup = ({ name, label, value, error, onChange, onFocus, onBlur }) => (
