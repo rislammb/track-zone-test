@@ -6,3 +6,8 @@
   color: #fafafa; 
   font-family: verdana, sans-serif; 
 }
+
+.app {
+  width: 95%;
+  max-width: 920px; 
+}
