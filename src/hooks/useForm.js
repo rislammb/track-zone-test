@@ -39,7 +39,6 @@ const useForm = (initial, validate) => {
 
   const handleSubmit = (e, cb) => {
     e.preventDefault();
-alert(cb);
 
     const oldState = JSON.parse(JSON.stringify(state));
 
@@ -65,6 +64,7 @@ export default useForm;
 const mapObjToState = obj => {
   return Object.keys(obj).reduce((acc, key) => {
     acc[key] = {
+      name: key,
       value: obj[key],
       error: '',
       touched: false,
