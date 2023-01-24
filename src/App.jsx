@@ -18,7 +18,7 @@ export default function App() {
         <Clock adminClock={state.adminClock} openModal={openModal} />
         <Button onClick={openModal}>Add Clock</Button>
       </Flex>
-
+<br />
       <Flex>
         { state.clocks.length > 0 && state.clocks.map(clock => 
           <Clock key={clock.id} adminClock={state.adminClock} clock={clock} openModal={openModal} deleteClock={deleteClock} />
