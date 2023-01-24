@@ -49,9 +49,7 @@ const useApp = () => {
     const oldState = JSON.parse(JSON.stringify(state));
     const index = oldState.clocks.findIndex(clock => clock.id === id);
 
-alert('before:' + JSON.stringify({ id, ...newClock }))
     if (index > -1) {
-alert(JSON.stringify({ id, ...newClock }))
       oldState.clocks[index] = { id, ...newClock };
     }
     oldState.open = false;
