@@ -1,5 +1,6 @@
 import useForm from '../hooks/useForm';
 import Modal from '../ui/Modal';
+import Card from '../ui/Card';
 import InputGroup from './shared/InputGroup';
 import Button from '../ui/Button';
 
@@ -42,10 +43,10 @@ alert('submit',JSON.stringify(values));
 
   return (
     <Modal>
-      <div>
-      <button onClick={closeModal}>
+      <Card>
+      <Button onClick={closeModal}>
         Close
-      </button>
+      </Button>
 
       <form onSubmit={e => handleSubmit(e, submit)}>
         <InputGroup value={state.title.value} error={state.title.error} label={'Clock Name'} name='title' onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
@@ -56,7 +57,7 @@ alert('submit',JSON.stringify(values));
           { openedClock ? 'Edit Clock' : 'Add Clock' }
         </Button>
       </form>
-      </div>
+      </Card>
     </Modal>
   );
 }
