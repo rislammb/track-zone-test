@@ -8,18 +8,18 @@ const Clock = ({ adminClock, clock, openModal, deleteClock }) => {
     <Card>
       <Title size={'lg'}>Clock</Title>
       <Title size={'sm'}>{clock.title}</Title>
-      <Text>{clock.timeZone}({clock.timeZone})</Text>
+      <Text>{`${clock.timeZone}(${clock.timeZone})`}</Text>
 
-      <Button color={'warning'} onClick={() = > deleteClock(clock.id)}>Delete</Button>
-      <Button onClick={() = > openModal(clock.id)}>Edit</Button>
+      <Button color={'warning'} onClick={() => deleteClock(clock.id)}>Delete</Button>
+      <Button onClick={() => openModal(clock.id)}>Edit</Button>
     </Card>
   ) : (
     <Card>
       <Title size={'lg'}>Clock</Title>
       <Title size={'sm'}>{adminClock.title}</Title>
-      <Text>{adminClock.timeZone}({adminClock.timeZone})</Text>
+      <Text>{`${adminClock.timeZone}(${adminClock.timeZone})`}</Text>
 
-      <Button onClick={() = > openModal('admin')}>Edit</Button>
+      <Button onClick={() => openModal('admin')}>Edit</Button>
     </Card>
   )
 }
