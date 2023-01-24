@@ -39,20 +39,22 @@ const useForm = (initial, validate) => {
 
   const handleSubmit = (e, cb) => {
     e.preventDefault();
+alert(cb);
 
-    const values = mapStateToValues(state);
+    const oldState = JSON.parse(JSON.stringify(state));
+
+    const values = mapStateToValues(oldState);
     const { valid, errors } = validate(values);
 
-    if (!valid) {
-      const oldState = JSON.parse(JSON.stringify(state));
-
+    if (valid) {
+      cb(values);
+    } else {
       Object.keys(errors).forEach(key => {
         oldState[key].error = errors[key]
       });
 
       setState(oldState);
     }
-    cb(values);
   };
 
   return { state, handleChange, handleFocus, handleBlur, handleSubmit } 
