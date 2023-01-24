@@ -10,4 +10,5 @@
 .app {
   width: 95%;
   max-width: 920px; 
+  margin: 8px auto; 
 }
