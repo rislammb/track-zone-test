@@ -11,7 +11,7 @@ const Modal = styled.div`
   justify-content: center; 
   align-items: center; 
   z-index: 2;
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(155, 155, 155, 0.85);
 `;
 
 export default Modal;
