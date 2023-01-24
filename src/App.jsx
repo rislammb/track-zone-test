@@ -2,6 +2,7 @@ import useApp from './hooks/useApp';
 import Clock from './components/Clock';
 import ClockForm from './components/ClockForm';
 
+import Flex from './ui/Flex';
 import Title from './ui/Title';
 import Button from './ui/Button';
 
@@ -13,14 +14,16 @@ export default function App() {
   return (
     <div className="app">
       <Title>Track Zone App</Title>
-      <div>
+      <Flex>
         <Clock adminClock={state.adminClock} openModal={openModal} />
         <Button onClick={openModal}>Add Clock</Button>
-      </div>
+      </Flex>
 
-      { state.clocks.length > 0 && state.clocks.map(clock => 
-         <Clock key={clock.id} adminClock={state.adminClock} clock={clock} openModal={openModal} deleteClock={deleteClock} />
-      )}
+      <Flex>
+        { state.clocks.length > 0 && state.clocks.map(clock => 
+          <Clock key={clock.id} adminClock={state.adminClock} clock={clock} openModal={openModal} deleteClock={deleteClock} />
+        )}
+      </Flex>
 
       { state.open && <ClockForm addClock={addClock} editAdminClock={editAdminClock} editClock={editClock} closeModal={closeModal} openedClock={state.openedClock}  /> }    
     </div>
