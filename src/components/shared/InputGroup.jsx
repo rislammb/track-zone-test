@@ -6,8 +6,7 @@ import Text from '../../ui/Text';
 const Group = styled.div`
   display: flex; 
   flex-direction: column; 
-  gap: 8px; 
-  padding: 8px; 
+  gap: 8px;
   border: 1px solid #aaa; 
 `; 
 
