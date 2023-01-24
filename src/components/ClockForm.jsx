@@ -44,7 +44,7 @@ alert('submit',JSON.stringify(values));
   };
 
   return (
-    <Modal onClick={closeModal}>
+    <Modal>
       <Card p={2} zI={5}>
        <Title size={'sm'}>{ openedClock ? 'Edit Clock Form' : 'Add Clock Form' }</Title>
       <Form onSubmit={e => handleSubmit(e, submit)}>
