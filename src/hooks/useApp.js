@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 const initial = {
   adminClock: {
-    title: 'admin Clock',
+    title: 'Admin Clock',
     timeZone: 'UTC',
     difference: '00:00'
   },
@@ -26,9 +26,9 @@ const useApp = () => {
 
   const editAdminClock = ({ title, timeZone, difference }) => {
     const newClock = { 
-      title: title ?? state.userClick.title,
-      timeZone: timeZone ?? state.userClick.timeZone,
-      difference: difference ?? state.userClick.difference
+      title: title ?? state.openedClock.title,
+      timeZone: timeZone ?? state.openedClock.timeZone,
+      difference: difference ?? state.openedClock.difference
     };
       
     setState(prev => ({
@@ -41,9 +41,9 @@ const useApp = () => {
 
   const editClock = (id, { title, timeZone, difference }) => {
     const newClock = { 
-      title: title ?? state.userClick.title,
-      timeZone: timeZone ?? state.userClick.timeZone,
-      difference: difference ?? state.userClick.difference
+      title: title ?? state.openedClock.title,
+      timeZone: timeZone ?? state.openedClock.timeZone,
+      difference: difference ?? state.openedClock.difference
     };
     
     const oldState = JSON.parse(JSON.stringify(state));
