@@ -1,6 +1,8 @@
 import useForm from '../hooks/useForm';
 import Modal from '../ui/Modal';
 import Card from '../ui/Card';
+import Title from '../ui/Title';
+import Form from '../ui/Form';
 import InputGroup from './shared/InputGroup';
 import Button from '../ui/Button';
 
@@ -42,21 +44,23 @@ alert('submit',JSON.stringify(values));
   };
 
   return (
-    <Modal>
-      <Card>
-      <Button onClick={closeModal}>
-        Close
-      </Button>
-
-      <form onSubmit={e => handleSubmit(e, submit)}>
+    <Modal onClick={closeModal}>
+      <Card p={2} zI={5}>
+       <Title size={'sm'}>{ openedClock ? 'Edit Clock Form' : 'Add Clock Form' }</Title>
+      <Form onSubmit={e => handleSubmit(e, submit)}>
         <InputGroup value={state.title.value} error={state.title.error} label={'Clock Name'} name='title' onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
         <InputGroup value={state.timeZone.value} error={state.timeZone.error} label={'Time Zone'} name='timeZone' onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
         <InputGroup value={state.difference.value} error={state.difference.error} label={'Time Difference'} name='difference' onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
 
+       <div>
+        <Button type='button' color='warning' onClick={closeModal}>
+          Cancel
+        </Button>
         <Button type='submit'>
           { openedClock ? 'Edit Clock' : 'Add Clock' }
         </Button>
-      </form>
+       </div>
+      </Form>
       </Card>
     </Modal>
   );
