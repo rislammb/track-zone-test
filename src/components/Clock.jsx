@@ -1,9 +1,12 @@
+import useClock from '../hooks/useClock';
 import Card from '../ui/Card';
 import Title from '../ui/Title';
 import Text from '../ui/Text';
 import Button from '../ui/Button';
 
 const Clock = ({ adminClock, clock, openModal, deleteClock }) => {
+  const { state, addEvent, editEvent, deleteEvent, openModal: openEventModal, closeModal } = useClock();
+ 
   return clock ? (
     <Card>
       <Title size={'lg'}>Clock</Title>
@@ -20,6 +23,9 @@ const Clock = ({ adminClock, clock, openModal, deleteClock }) => {
       <Text>{`${adminClock.timeZone}(${adminClock.difference})`}</Text>
 
       <Button onClick={() => openModal('admin')}>Edit</Button>
+
+      <Button onClick={openEventModal}>Add Event</Button>
+      {state.open && <Button onClick={closeModal}>Close</Button>}
     </Card>
   )
 }
