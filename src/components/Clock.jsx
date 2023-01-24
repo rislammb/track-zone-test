@@ -14,11 +14,10 @@ const Clock = ({ adminClock, clock, openModal, deleteClock }) => {
       <Title size={'sm'}>{clock ? clock.title : adminClock.title}</Title>
       <Text>{`${clock ? clock.timeZone : adminClock.timeZone}(${clock ? clock.difference : adminClock.difference})`}</Text>
       <Flex jc={'end'}>
-        {clock && <Button onClick={() => deleteClock(clock.id)}>Delete</Button>}
+        {clock && <Button color={'warning'} onClick={() => deleteClock(clock.id)}>Delete</Button>}
         <Button onClick={() => openModal(clock ? clock.id : 'admin')}>Edit</Button>
       </Flex>
       <br />
-      <hr />
       <Flex jc={'space-between'} ai={'center'}>
         <Title size={'sm'}>Events:</Title>
         <Button onClick={openEventModal}>Add Event</Button>
