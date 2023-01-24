@@ -1,6 +1,7 @@
 import useForm from '../hooks/useForm';
 
 const validate = values => {
+alert('validate',JSON.stringify(values))
   const errors = {};
   Object.keys(values).forEach(key => {
     if (!values[key]) {
@@ -25,7 +26,7 @@ const ClockForm = ({ addClock, editAdminClock, editClock, closeModal, openedCloc
   const { state, handleChange, handleFocus, handleBlur, handleSubmit } = useForm(initial, validate);
 
   const submit = (values) => {
-alert(values);
+alert('submit',JSON.stringify(values));
     if (openedClock) {
       if(openedClock.id){
         editClock({ ...values });
