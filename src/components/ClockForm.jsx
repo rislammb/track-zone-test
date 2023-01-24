@@ -1,6 +1,7 @@
 import useForm from '../hooks/useForm';
 import Modal from '../ui/Modal';
 import InputGroup from './shared/InputGroup';
+import Button from '../ui/Button';
 
 const validate = values => {
   const errors = {};
@@ -48,13 +49,12 @@ alert('submit',JSON.stringify(values));
 
       <form onSubmit={e => handleSubmit(e, submit)}>
         <InputGroup value={state.title.value} error={state.title.error} label={'Clock Name'} name='title' onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
-        <input value={state.timeZone.value} name='timeZone' onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
-        {state.timeZone.error && <span>{state.timeZone.error}</span>}
-        <input value={state.difference.value} name='difference' onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
-        {state.difference.error && <span>{state.difference.error}</span>}
-        <button type='submit'>
+        <InputGroup value={state.timeZone.value} error={state.timeZone.error} label={'Time Zone'} name='timeZone' onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
+        <InputGroup value={state.difference.value} error={state.difference.error} label={'Time Difference'} name='difference' onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
+
+        <Button type='submit'>
           { openedClock ? 'Edit Clock' : 'Add Clock' }
-        </button>
+        </Button>
       </form>
       </div>
     </Modal>
