@@ -77,7 +77,7 @@ const mapObjToState = obj => {
 
 const mapStateToValues = state => {
   return Object.keys(state).reduce((acc, key) => {
-    acc[key] = state[key];
+    acc[key] = state[key].value;
 
     return acc; 
   }, {});
