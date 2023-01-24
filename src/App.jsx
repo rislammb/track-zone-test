@@ -1,29 +1,26 @@
 import useApp from './hooks/useApp';
+import Clock from './components/Clock';
 import ClockForm from './components/ClockForm';
+
+import Title from './ui/Title';
+import Button from './ui/Button';
+
 import "./styles.css";
 
 export default function App() {
   const { state, addClock, editAdminClock, editClock, deleteClock, openModal, closeModal } = useApp();
  
   return (
-    <div className="App">
-      <h1>Hello CodeSandbox</h1>
+    <div className="app">
+      <Title>Track Zone App</Title>
       <div>
-        <div>
-          <h2>{ state.adminClock.title }</h2>
-          <p>{ state.adminClock.timeZone }</p>
-          <p>{ state.adminClock.difference }</p>
-        </div>
-        <button onClick={openModal}>Add Clock</button>
+        <Clock adminClock={state.adminClock} openModal={openModal} />
+        <Button onClick={openModal}>Add Clock</Button>
       </div>
 
-      { state.clocks.length > 0 && state.clocks.map(clock => (
-        <div>
-          <h2>{ clock.title }</h2>
-          <p>{ clock.timeZone }</p>
-          <p>{ clock.difference }</p>
-        </div>
-      ))}
+      { state.clocks.length > 0 && state.clocks.map(clock => 
+         <Clock key={clock.id} adminClock={state.adminClock} openModal={openModal} deleteClock={deleteClock} />
+      )}
 
       { state.open && <ClockForm addClock={addClock} editAdminClock={editAdminClock} editClock={editClock} closeModal={closeModal} openedClock={state.openedClock}  /> }    
     </div>
