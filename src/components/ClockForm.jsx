@@ -26,7 +26,7 @@ const ClockForm = ({ addClock, editAdminClock, editClock, closeModal, openedCloc
 
   const submit = (values) => {
     if (openedClock) {
-      if(openedClok.id){
+      if(openedClock.id){
         editClock({ ...values });
       } else{
         editAdminClock({ ...values });
