@@ -25,7 +25,7 @@ export default function App() {
         </div>
       ))}
 
-      { state.open && <ClockForm addClock={addClock} editAdminClock={editAdminClock} editClock={editClock} closeModal={closeModal} openedClock={openedClock}  /> }    
+      { state.open && <ClockForm addClock={addClock} editAdminClock={editAdminClock} editClock={editClock} closeModal={closeModal} openedClock={state.openedClock}  /> }    
     </div>
   );
 }
