@@ -1,11 +1,16 @@
 import styled from 'styled-components';
 
+const colors = {
+  primary: '#7af',
+  warning: '#fa7'
+};
+
 const Button = styled.button`
-  color: palevioletred;
+  color: ${ props => props.color ? color[props.color] : palevioletred };
   font-size: 1em;
-  margin: 1em;
   padding: 0.25em 1em;
-  border: 2px solid palevioletred;
+  border: 1px solid palevioletred;
+  border-color: ${ props => props.color ? color[props.color] : palevioletred };
   border-radius: 3px;
 `;
 
