@@ -1,5 +1,6 @@
 import useForm from '../hooks/useForm';
 import Modal from '../ui/Modal';
+import InputGroup from './shared/InputGroup';
 
 const validate = values => {
   const errors = {};
@@ -46,8 +47,7 @@ alert('submit',JSON.stringify(values));
       </button>
 
       <form onSubmit={e => handleSubmit(e, submit)}>
-        <input value={state.title.value} name='title' onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
-        {state.title.error && <span>{state.title.error}</span>}
+        <InputGroup value={state.title.value} error={state.title.error} label={'Clock Name'} name='title' onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
         <input value={state.timeZone.value} name='timeZone' onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
         {state.timeZone.error && <span>{state.timeZone.error}</span>}
         <input value={state.difference.value} name='difference' onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
