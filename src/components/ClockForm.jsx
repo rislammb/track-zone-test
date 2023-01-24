@@ -1,4 +1,5 @@
 import useForm from '../hooks/useForm';
+import Modal from '../ui/Modal';
 
 const validate = values => {
   const errors = {};
@@ -38,7 +39,8 @@ alert('submit',JSON.stringify(values));
   };
 
   return (
-    <div>
+    <Modal>
+      <div>
       <button onClick={closeModal}>
         Close
       </button>
@@ -54,7 +56,8 @@ alert('submit',JSON.stringify(values));
           { openedClock ? 'Edit Clock' : 'Add Clock' }
         </button>
       </form>
-    </div>
+      </div>
+    </Modal>
   );
 }
 
