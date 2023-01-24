@@ -25,6 +25,7 @@ const ClockForm = ({ addClock, editAdminClock, editClock, closeModal, openedCloc
   const { state, handleChange, handleFocus, handleBlur, handleSubmit } = useForm(initial, validate);
 
   const submit = (values) => {
+alert(values);
     if (openedClock) {
       if(openedClock.id){
         editClock({ ...values });
@@ -43,11 +44,11 @@ const ClockForm = ({ addClock, editAdminClock, editClock, closeModal, openedCloc
       </button>
 
       <form onSubmit={e => handleSubmit(e, submit)}>
-        <input value={state.title.value} name='title' onChange={handleChange} />
+        <input value={state.title.value} name='title' onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
         {state.title.error && <span>{state.title.error}</span>}
-        <input value={state.timeZone.value} name='timeZone' onChange={handleChange} />
+        <input value={state.timeZone.value} name='timeZone' onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
         {state.timeZone.error && <span>{state.timeZone.error}</span>}
-        <input value={state.difference.value} name='difference' onChange={handleChange} />
+        <input value={state.difference.value} name='difference' onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
         {state.difference.error && <span>{state.difference.error}</span>}
         <button type='submit'>
           { openedClock ? 'Edit Clock' : 'Add Clock' }
