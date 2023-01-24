@@ -1,7 +1,6 @@
 import useForm from '../hooks/useForm';
 
 const validate = values => {
-alert('validate',JSON.stringify(values))
   const errors = {};
   Object.keys(values).forEach(key => {
     if (!values[key]) {
