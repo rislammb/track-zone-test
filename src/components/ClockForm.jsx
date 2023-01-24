@@ -1,6 +1,7 @@
 import useForm from '../hooks/useForm';
 import Modal from '../ui/Modal';
 import Card from '../ui/Card';
+import Flex from '../ui/Flex';
 import Title from '../ui/Title';
 import Form from '../ui/Form';
 import InputGroup from './shared/InputGroup';
@@ -31,7 +32,6 @@ const ClockForm = ({ addClock, editAdminClock, editClock, closeModal, openedCloc
   const { state, handleChange, handleFocus, handleBlur, handleSubmit } = useForm(initial, validate);
 
   const submit = (values) => {
-alert('submit',JSON.stringify(values));
     if (openedClock) {
       if(openedClock.id){
         editClock({ ...values });
@@ -45,21 +45,21 @@ alert('submit',JSON.stringify(values));
 
   return (
     <Modal>
-      <Card p={2} zI={5}>
-       <Title size={'sm'}>{ openedClock ? 'Edit Clock Form' : 'Add Clock Form' }</Title>
+      <Card p={2}>
+      <Title size={'sm'}>{ openedClock ? 'Edit Clock Form' : 'Add Clock Form' }</Title>
       <Form onSubmit={e => handleSubmit(e, submit)}>
         <InputGroup value={state.title.value} error={state.title.error} label={'Clock Name'} name='title' onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
         <InputGroup value={state.timeZone.value} error={state.timeZone.error} label={'Time Zone'} name='timeZone' onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
         <InputGroup value={state.difference.value} error={state.difference.error} label={'Time Difference'} name='difference' onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} />
 
-       <div>
-        <Button type='button' color='warning' onClick={closeModal}>
+       <Flex js={'flex-end'}>
+        <Button type='button' color={'warning'} onClick={closeModal}>
           Cancel
         </Button>
         <Button type='submit'>
           { openedClock ? 'Edit Clock' : 'Add Clock' }
         </Button>
-       </div>
+       </Flex>
       </Form>
       </Card>
     </Modal>
