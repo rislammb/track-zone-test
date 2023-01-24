@@ -32,8 +32,10 @@ const ClockForm = ({ addClock, editAdminClock, editClock, closeModal, openedCloc
   const { state, handleChange, handleFocus, handleBlur, handleSubmit } = useForm(initial, validate);
 
   const submit = (values) => {
+alert('submit:', JSON.stringify(values))
     if (openedClock) {
       if(openedClock.id){
+alert('id has:', JSON.stringify(values))
         editClock({ ...values });
       } else{
         editAdminClock({ ...values });
