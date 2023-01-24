@@ -7,7 +7,7 @@ const sizes = {
 };
 
 const Title = styled.h1`
-  font-size: ${props => sizes[props.size]};
+  font-size: ${props => props.size ? sizes[props.size] : '1.4em'};
   text-align: center;
   color: palevioletred;
 `;
