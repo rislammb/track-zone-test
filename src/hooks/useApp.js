@@ -24,7 +24,7 @@ const useApp = () => {
     }))
   };
 
-  const editUserClock = ({ title, timeZone, difference }) => {
+  const editAdminClock = ({ title, timeZone, difference }) => {
     const newClock = { 
       title: title ?? state.userClick.title,
       timeZone: timeZone ?? state.userClick.timeZone,
@@ -33,7 +33,7 @@ const useApp = () => {
       
     setState(prev => ({
       ...prev, 
-      userClock: newClock,
+      adminClock: newClock,
       open: false,
       openedClock: null
     }))
@@ -97,7 +97,7 @@ const useApp = () => {
   return {
     state, 
     addClock, 
-    editUserClock, 
+    editAdminClock, 
     editClock, 
     deleteClock, 
     openModal,
