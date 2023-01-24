@@ -3,13 +3,8 @@ import ClockForm from './components/ClockForm';
 import "./styles.css";
 
 export default function App() {
-  const { state, addClock, editUserClock, editClock, deleteClock, openModal, closeModal } = useApp();
+  const { state, addClock, editAdminClock, editClock, deleteClock, openModal, closeModal } = useApp();
  
-  const handleSubmit = e => {
-    e.preventDefault()
-
-    addClock({ title: 'Test', timeZone: 'GMT', difference: '02:15' })
-  }
   return (
     <div className="App">
       <h1>Hello CodeSandbox</h1>
@@ -30,7 +25,7 @@ export default function App() {
         </div>
       ))}
 
-      { state.open && ClockForm }    
+      { state.open && <ClockForm addClock={addClock} editAdminClock={editAdminClock} editClock={editClock} closeModal={closeModal} openedClock={openedClock}  /> }    
     </div>
   );
 }
