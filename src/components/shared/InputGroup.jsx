@@ -13,7 +13,7 @@ const Group = styled.div`
 
 const InputGroup = ({ name, label, value, error, onChange, onFocus, onBlur }) => (
   <Group>
-    <Label htmlFor={name}>{label}<Label>
+    <Label htmlFor={name}>{label}</Label>
     <Input value={value} name={name} id={name} onChange={onChange} onFocus={onFocus} onBlur={onBlur} />
     {error && <Text size={'sm'} color={'warning'}>{error}</Text>}
   </Group>
