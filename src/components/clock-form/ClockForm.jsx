@@ -119,7 +119,7 @@ const ClockForm = ({
             onFocus={handleFocus}
             onBlur={handleBlur}
           >
-            {zones.map(zone => <option value={zone.value}>{zone.name}</option>)}
+            {zones.map(zone => <option key={zone.name} value={zone.value}>{zone.name}</option>)}
           </select>
 
           <select
@@ -131,7 +131,7 @@ const ClockForm = ({
             onFocus={handleFocus}
             onBlur={handleBlur}
           >
-            {times.map(time => <option value={time.value}>{time.name}</option>)}
+            {times.map(time => <option key={time.name} value={time.value}>{time.name}</option>)}
           </select>
           <Flex jc={'end'}>
             <Button type='button' color={'warning'} onClick={closeModal}>
