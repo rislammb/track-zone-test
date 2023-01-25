@@ -6,11 +6,17 @@ const Event = ({ event, openModal, deleteEvent }) => {
   return (
     <Flex fd={'column'}>
       <Text>{event.title}</Text>
-      <Text p={'0px'} size={'sm'}>
-        {event.date} : {event.time}
-      </Text>
 
-      <Flex jc={'center'}>
+      <Flex ai={'center'}>
+      <Flex fd={'column'}>
+      <Text p={'0px'} size={'sm'}>
+        {event.date}, {event.time}
+      </Text>
+      <Text p={'0px'} size={'sm'}>
+        Time from admin clock:
+      </Text>
+      </Flex>
+      <Flex>
         <Button
           onClick={() => openModal(event.id)}
           fs={'13px'}
@@ -22,6 +28,7 @@ const Event = ({ event, openModal, deleteEvent }) => {
         <Button onClick={() => openModal(event.id)} fs={'13px'} p={'3px 8px'}>
           Edit
         </Button>
+      </Flex>
       </Flex>
     </Flex>
   );
