@@ -18,7 +18,7 @@ const Event = ({ event, openModal, deleteEvent }) => {
       </Flex>
       <Flex>
         <Button
-          onClick={() => openModal(event.id)}
+          onClick={() => deleteEvent(event.id)}
           fs={'13px'}
           p={'3px 8px'}
           color={'danger'}
