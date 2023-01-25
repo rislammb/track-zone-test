@@ -57,9 +57,9 @@ const Clock = ({ adminClock, clock, openModal, deleteClock }) => {
         {time.hours} : {time.minutes} : {time.seconds}
       </Title>
       <Title size={'sm'}>{clock ? clock.title : adminClock.title}</Title>
-      <Text ta={'center'}>`${JSON.parse(clock ? clock.timeZone : adminClock.timeZone).title}(${
+      <Text ta={'center'}>{JSON.parse(clock ? clock.timeZone : adminClock.timeZone).title}({
         JSON.parse(clock ? clock.difference : adminClock.difference).title
-      })`}</Text>
+      })</Text>
       <br />
       <Hr />
       <Flex jc={'space-between'} m={'8px 0px'} ai={'center'}>
