@@ -7,7 +7,7 @@ const Event = ({ event, openModal, deleteEvent }) => {
     <Flex fd={'column'}>
       <Text>{event.title}</Text>
 
-      <Flex ai={'center'}>
+      <Flex jc={'space-between'} ai={'center'}>
       <Flex fd={'column'}>
       <Text p={'0px'} size={'sm'}>
         {event.date}, {event.time}
