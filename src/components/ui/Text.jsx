@@ -15,6 +15,7 @@ const colors = {
 const Text = styled.p`
   font-size: ${(props) => (props.size ? sizes[props.size] : '1em')};
   padding: ${(props) => props.p ?? '4px 0'};
+  text-align: ${(props) => props.ta ?? ''};
   color: ${(props) => (props.color ? colors[props.color] : '#fafafa')};
 `;
 
