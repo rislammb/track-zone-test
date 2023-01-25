@@ -47,7 +47,7 @@ const Clock = ({ adminClock, clock, openModal, deleteClock }) => {
         {time.hours} : {time.minutes} : {time.seconds}
       </Title>
       <Title size={'sm'}>{clock ? clock.title : adminClock.title}</Title>
-      <Text>{`${clock ? clock.timeZone : adminClock.timeZone}(${
+      <Text ta={'center'}>{`${clock ? clock.timeZone : adminClock.timeZone}(${
         clock ? clock.difference : adminClock.difference
       })`}</Text>
       <Flex jc={'end'}>
@@ -66,7 +66,6 @@ const Clock = ({ adminClock, clock, openModal, deleteClock }) => {
         <Text>Events:</Text>
         <Button onClick={openEventModal}>Add</Button>
       </Flex>
-      <br />
 
       <Flex fd={'column'}>
         {state.events.length > 0 &&
