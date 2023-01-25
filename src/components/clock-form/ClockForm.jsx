@@ -77,7 +77,8 @@ const ClockForm = ({
         title: '',
         timeZone: {title: 'UTC', 
   minutes: 0},
-        difference: '00:00',
+        difference: {title: '00:00', 
+  minutes: 0},
       };
 
   const { state, handleChange, handleFocus, handleBlur, handleSubmit } =
