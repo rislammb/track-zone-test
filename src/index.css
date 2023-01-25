@@ -1,0 +1,19 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #232323;
+  color: #eaeaea;
+  font-family: verdana, sans-serif;
+}
+
+.app {
+  width: 95%;
+  max-width: 920px;
+  margin: 8px auto;
+  /* color: #59acff; */
+  /* flex-wrap: wrap; */
+  /* flex-grow: 1; */
+  /* flex-basis: auto;
+  flex-basis: content; */
+}
