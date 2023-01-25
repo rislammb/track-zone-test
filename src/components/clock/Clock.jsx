@@ -43,6 +43,16 @@ const Clock = ({ adminClock, clock, openModal, deleteClock }) => {
 
   return (
     <Card p={2} fb={'320px'} fg={'1'}>
+      <Flex jc={'space-between'}>
+        {clock ? (
+          <Button color={'danger'} onClick={() => deleteClock(clock.id)}>
+            Delete
+          </Button>
+        ) : <span></span}
+        <Button onClick={() => openModal(clock ? clock.id : 'admin')}>
+          Edit
+        </Button>
+      </Flex>
       <Title size={'lg'} color={'primary'}>
         {time.hours} : {time.minutes} : {time.seconds}
       </Title>
@@ -50,16 +60,6 @@ const Clock = ({ adminClock, clock, openModal, deleteClock }) => {
       <Text ta={'center'}>{`${clock ? clock.timeZone : adminClock.timeZone}(${
         clock ? clock.difference : adminClock.difference
       })`}</Text>
-      <Flex jc={'end'}>
-        {clock && (
-          <Button color={'danger'} onClick={() => deleteClock(clock.id)}>
-            Delete
-          </Button>
-        )}
-        <Button onClick={() => openModal(clock ? clock.id : 'admin')}>
-          Edit
-        </Button>
-      </Flex>
       <br />
       <Hr />
       <Flex jc={'space-between'} m={'8px 0px'} ai={'center'}>
