@@ -75,10 +75,10 @@ const ClockForm = ({
       }
     : {
         title: '',
-        timeZone: {title: 'UTC', 
-  minutes: 0},
-        difference: {title: '00:00', 
-  minutes: 0},
+        timeZone: JSON.stringify({title: 'UTC', 
+  minutes: 0}),
+        difference: JSON.stringify({title: '00:00', 
+  minutes: 0}),
       };
 
   const { state, handleChange, handleFocus, handleBlur, handleSubmit } =
@@ -119,7 +119,7 @@ const ClockForm = ({
             onFocus={handleFocus}
             onBlur={handleBlur}
           >
-            {zones.map(zone => <option key={zone.name} value={zone.value}>{zone.name}</option>)}
+            {zones.map(zone => <option key={zone.name} value={JSON.stringify(zone.value)}>{zone.name}</option>)}
           </select>
 
           <select
@@ -131,7 +131,7 @@ const ClockForm = ({
             onFocus={handleFocus}
             onBlur={handleBlur}
           >
-            {times.map(time => <option key={time.name} value={time.value}>{time.name}</option>)}
+            {times.map(time => <option key={time.name} value={JSON.stringify(time.value)}>{time.name}</option>)}
           </select>
           <Flex jc={'end'}>
             <Button type='button' color={'warning'} onClick={closeModal}>
