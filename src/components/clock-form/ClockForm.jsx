@@ -28,6 +28,27 @@ const zones = [{
  }
 ];
 
+const times = [{
+  name: '+03:30',
+  value: {title: '+03:30', 
+  minutes: (3 * 60) + 30}
+ },{
+  name: '00:00',
+  value: {title: '00:00', 
+  minutes: 0}
+ },
+ {
+  name: '-02:30',
+  value: {title: '-02:30', 
+  minutes: -((2 * 60) + 30)}
+ },
+ {
+  name: '-04:00',
+  value: {title: '-04:00', 
+  minutes: -(4 * 60)}
+ }
+];
+
 const validate = (values) => {
   const errors = {};
   Object.keys(values).forEach((key) => {
@@ -97,9 +118,10 @@ const ClockForm = ({
             onFocus={handleFocus}
             onBlur={handleBlur}
           >
-          {zones.map(zone => <option value={zone.value}>{zone.name}</option>)}
+            {zones.map(zone => <option value={zone.value}>{zone.name}</option>)}
           </select>
-          <InputGroup
+
+          <select
             value={state.difference.value}
             error={state.difference.error}
             label={'Time Difference'}
@@ -107,8 +129,9 @@ const ClockForm = ({
             onChange={handleChange}
             onFocus={handleFocus}
             onBlur={handleBlur}
-          />
-
+          >
+            {times.map(time => <option value={time.value}>{time.name}</option>)}
+          </select>
           <Flex jc={'end'}>
             <Button type='button' color={'warning'} onClick={closeModal}>
               Cancel
