@@ -57,8 +57,8 @@ const Clock = ({ adminClock, clock, openModal, deleteClock }) => {
         {time.hours} : {time.minutes} : {time.seconds}
       </Title>
       <Title size={'sm'}>{clock ? clock.title : adminClock.title}</Title>
-      <Text ta={'center'}>{`${clock ? clock.timeZone : adminClock.timeZone}(${
-        clock ? clock.difference : adminClock.difference
+      <Text ta={'center'}>{`${clock ? clock.timeZone.title : adminClock.timeZone.title}(${
+        clock ? clock.difference.title : adminClock.difference.title
       })`}</Text>
       <br />
       <Hr />
