@@ -44,11 +44,11 @@ const Clock = ({ adminClock, clock, openModal, deleteClock }) => {
   return (
     <Card p={2} fb={'320px'} fg={'1'}>
       <Flex jc={'space-between'}>
-        {clock ? (
+        {clock && (
           <Button color={'danger'} onClick={() => deleteClock(clock.id)}>
             Delete
           </Button>
-        ) : <span></span}
+        )}
         <Button onClick={() => openModal(clock ? clock.id : 'admin')}>
           Edit
         </Button>
