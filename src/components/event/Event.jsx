@@ -5,7 +5,7 @@ import Text from '../ui/Text';
 const Event = ({ event, openModal, deleteEvent }) => {
   return (
     <Flex fd={'column'}>
-      <Text>{event.title}</Text>
+      <Text color={'warning'}>{event.title}</Text>
 
       <Flex jc={'space-between'} ai={'center'}>
       <Flex fd={'column'}>
