@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
 const sizes = {
-  sm: '1.3rem',
-  md: '1.7rem',
-  lg: '2.1rem',
-  xl: '2.5rem',
+  sm: '1.3em',
+  md: '1.7em',
+  lg: '2.1em',
+  xl: '2.5em',
 };
 
 const colors = {
