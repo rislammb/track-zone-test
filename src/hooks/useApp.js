@@ -3,8 +3,8 @@ import { useState } from 'react';
 const initial = {
   adminClock: {
     title: 'Admin Clock',
-    timeZone: JSON.stringify({title: 'UTC', minutes: 0}),
-    difference: JSON.stringify({title: '00:00', minutes: 0}),
+    timeZone: JSON.stringify({title: 'PST', minutes: -(8 * 60)}),
+    difference: JSON.stringify({title: '-00:30', minutes: -30}),
   },
   clocks: [],
   open: false,
