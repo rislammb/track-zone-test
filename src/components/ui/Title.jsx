@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
 const sizes = {
-  sm: '20px',
-  md: '26px',
-  lg: '34px',
-  xl: '40px',
+  sm: '1.3rem',
+  md: '1.7rem',
+  lg: '2.1rem',
+  xl: '2.5rem',
 };
 
 const colors = {
@@ -14,7 +14,7 @@ const colors = {
 };
 
 const Title = styled.h1`
-  font-size: ${(props) => (props.size ? sizes[props.size] : '1.4em')};
+  font-size: ${(props) => (props.size ? sizes[props.size] : sizes['md'])};
   padding: ${(props) => props.p ?? '8px 6px'};
   text-align: center;
   color: ${(props) => (props.color ? colors[props.color] : '')};
