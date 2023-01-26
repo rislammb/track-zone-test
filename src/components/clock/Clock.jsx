@@ -41,7 +41,7 @@ const Clock = ({ adminClock, clock, openModal, deleteClock }) => {
     return () => {
       clearInterval(intervalId);
     };
-  }, []);
+  }, [clock ?? adminClock]);
 
   return (
     <Card p={2} fb={'320px'} fg={'1'}>
