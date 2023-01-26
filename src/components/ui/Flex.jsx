@@ -6,7 +6,7 @@ const Flex = styled.div`
   display: flex;
   flex-direction: ${(props) => props.fd ?? ''};
   flex-wrap: ${(props) => props.fw ?? 'wrap'};
-  justify-content: ${(props) => props.jc ?? ''};
+  justify-content: ${(props) => props.jc ?? 'center'};
   align-items: ${(props) => props.ai ?? ''};
   gap: ${(props) => props.gap ?? '8px'};
 `;

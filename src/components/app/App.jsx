@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import useApp from '../../hooks/useApp';
 import ClockForm from '../clock-form/ClockForm';
 import Clock from '../clock/Clock';
@@ -16,14 +17,29 @@ const App = () => {
     openModal,
     closeModal,
   } = useApp();
+  const [date, setDate] = useState(new Date().toUTCString());
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setDate(new Date().toUTCString());
+    }, 1000);
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
 
   return (
     <div className='app'>
-      <Title color={'primary'} p={'12px 8px'}>
+      <Title color={'primary'} size={'lg'} p={'12px 8px'}>
         Track Zone App
       </Title>
       <Flex ai={'start'}>
-        <Clock adminClock={state.adminClock} openModal={openModal} />
+        <Clock
+          adminClock={state.adminClock}
+          date={date}
+          openModal={openModal}
+        />
         <Button fs={'18px'} p={'8px 24px'} onClick={openModal}>
           Add Clock
         </Button>
@@ -36,6 +52,7 @@ const App = () => {
               key={clock.id}
               adminClock={state.adminClock}
               clock={clock}
+              date={date}
               openModal={openModal}
               deleteClock={deleteClock}
             />

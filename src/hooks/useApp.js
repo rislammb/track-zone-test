@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const initial = {
   adminClock: {
     title: 'Admin Clock',
-    timeZone: JSON.stringify({title: 'PST', minutes: -(8 * 60)}),
-    difference: JSON.stringify({title: '-00:30', minutes: -30}),
+    timeZone: JSON.stringify({ title: 'UTC', minutes: 0 }),
+    difference: JSON.stringify({ title: '00:00', minutes: 0 }),
   },
   clocks: [],
   open: false,
@@ -12,7 +12,11 @@ const initial = {
 };
 
 const useApp = () => {
-  const [state, setState] = useState(initial);
+  const initialState = localStorage.getItem('FSA-CLOCK')
+    ? JSON.parse(localStorage.getItem('FSA-CLOCK'))
+    : initial;
+
+  const [state, setState] = useState(initialState);
 
   const addClock = ({ title, timeZone, difference }) => {
     const newClock = {
@@ -98,6 +102,10 @@ const useApp = () => {
       openedClock: null,
     }));
   };
+
+  useEffect(() => {
+    localStorage.setItem('FSA-CLOCK', JSON.stringify(state));
+  }, [state]);
 
   return {
     state,

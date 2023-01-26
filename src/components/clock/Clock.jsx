@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { addMinutes, subMinutes } from 'date-fns'
+import { addMinutes, formatDistance } from 'date-fns';
+import { addZeroFrist, getAmPm, getHours, minutesFromUTC } from '../../utils';
 
 import useClock from '../../hooks/useClock';
 import EventForm from '../event-form/EventForm';
@@ -9,10 +9,11 @@ import Button from '../ui/Button';
 import Card from '../ui/Card';
 import Flex from '../ui/Flex';
 import Hr from '../ui/Hr';
+import Span from '../ui/Span';
 import Text from '../ui/Text';
 import Title from '../ui/Title';
 
-const Clock = ({ adminClock, clock, openModal, deleteClock }) => {
+const Clock = ({ adminClock, clock, date, openModal, deleteClock }) => {
   const {
     state,
     addEvent,
@@ -22,47 +23,44 @@ const Clock = ({ adminClock, clock, openModal, deleteClock }) => {
     closeModal,
   } = useClock();
 
-  // const [time, setTime] = useState({
-  //  hours: new Date().getUTCHours(),
-   // minutes: new Date().getUTCMinutes(),
-  //  seconds: new Date().getUTCSeconds(),
- // });
-
-  const minutesFromUTC = JSON.parse(clock ? clock.timeZone: adminClock.timeZone)?.minutes + JSON.parse(clock ? clock.difference : adminClock.difference)?.minutes;
-alert(JSON.parse(clock ? clock.difference : adminClock.difference)?.minutes)
-  const initial = minutesFromUTC > -1 ? addMinutes(new Date(), minutesFromUTC) : subMinutes(new Date(), minutesFromUTC);
-  const [time, setTime] = useState(initial);
-
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      const newDate = minutesFromUTC > -1 ? addMinutes(new Date(), minutesFromUTC) : subMinutes(new Date(), minutesFromUTC);
-      setTime(newDate);
-    }, 1000);
-
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, [clock ?? adminClock]);
+  const time = addMinutes(new Date(date), minutesFromUTC(clock ?? adminClock));
 
   return (
-    <Card p={2} fb={'320px'} fg={'1'}>
+    <Card p={2} fb={'320px'} mw={'450px'} fg={'1'}>
       <Flex jc={'space-between'}>
-        {clock && (
+        {clock ? (
           <Button color={'danger'} onClick={() => deleteClock(clock.id)}>
             Delete
           </Button>
+        ) : (
+          <span></span>
         )}
         <Button onClick={() => openModal(clock ? clock.id : 'admin')}>
           Edit
         </Button>
       </Flex>
       <Title size={'lg'} color={'primary'}>
-        { time.getUTCHours() } : { time.getUTCMinutes() } : { time.getUTCSeconds() }
+        {getHours(time)}:{addZeroFrist(time.getUTCMinutes())}
+        <Span fs={'20px'}>
+          :{addZeroFrist(time.getUTCSeconds())} {getAmPm(time)}
+        </Span>
       </Title>
       <Title size={'sm'}>{clock ? clock.title : adminClock.title}</Title>
-      <Text ta={'center'}>{JSON.parse(clock ? clock.timeZone : adminClock.timeZone).title}({
-        JSON.parse(clock ? clock.difference : adminClock.difference).title
-      })</Text>
+      <Text ta={'center'}>
+        {JSON.parse(clock ? clock.timeZone : adminClock.timeZone)?.title}(
+        {JSON.parse(clock ? clock.difference : adminClock.difference)?.title})
+      </Text>
+      {clock && (
+        <Text ta={'center'} color={'secondary'}>
+          {formatDistance(
+            addMinutes(new Date(date), minutesFromUTC(clock)),
+            addMinutes(new Date(date), minutesFromUTC(adminClock)),
+            {
+              addSuffix: true,
+            }
+          )}
+        </Text>
+      )}
       <br />
       <Hr />
       <Flex jc={'space-between'} m={'8px 0px'} ai={'center'}>

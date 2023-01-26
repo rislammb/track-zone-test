@@ -7,13 +7,12 @@ const colors = {
 };
 
 const Button = styled.button`
-  color: ${(props) => (props.color ? colors[props.color] : 'palevioletred')};
+  color: ${(props) => (props.color ? colors[props.color] : '#ff91b6')};
   cursor: pointer;
   font-size: ${(props) => props.fs ?? '1em'};
   padding: ${(props) => props.p ?? '0.25em 1em'};
   border: 1px solid;
-  border-color: ${(props) =>
-    props.color ? colors[props.color] : 'palevioletred'};
+  border-color: ${(props) => (props.color ? colors[props.color] : '#ff91b6')};
   border-radius: 3px;
   transition: all 0.09s ease-in-out;
 

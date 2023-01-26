@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
 const sizes = {
-  sm: '1.2em',
-  md: '1.4em',
-  lg: '1.6em',
+  sm: '20px',
+  md: '26px',
+  lg: '34px',
 };
 
 const colors = {

@@ -7,9 +7,9 @@ const Input = styled.input.attrs((props) => ({
   // or we can define dynamic ones
   size: props.size || '4px 8px',
 }))`
-  color: palevioletred;
+  color: #ff91b6;
   font-size: 1em;
-  border: 1px solid palevioletred;
+  border: 1px solid #ff91b6;
   outline: none;
   border-radius: 3px;
 
