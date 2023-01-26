@@ -61,6 +61,7 @@ const EventForm = ({ addEvent, editEvent, closeModal, openedEvent }) => {
             value={state.date.value}
             error={state.date.error}
             label={'Date'}
+type='date'
             name={state.date.name}
             onChange={handleChange}
             onFocus={handleFocus}
@@ -70,6 +71,7 @@ const EventForm = ({ addEvent, editEvent, closeModal, openedEvent }) => {
             value={state.time.value}
             error={state.time.error}
             label={'Time'}
+type='time'
             name={state.time.name}
             onChange={handleChange}
             onFocus={handleFocus}
