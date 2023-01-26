@@ -39,8 +39,8 @@ const Clock = ({ adminClock, clock, date, openModal, deleteClock }) => {
           Edit
         </Button>
       </Flex>
-      <Title size={'lg'} color={'primary'}>
-        {getHours(time)}:{addZeroFrist(time.getUTCMinutes())}
+      <Title size={'xl'} color={'primary'}>
+        {addZeroFrist(getHours(time))}:{addZeroFrist(time.getUTCMinutes())}
         <Span fs={'20px'}>
           :{addZeroFrist(time.getUTCSeconds())} {getAmPm(time)}
         </Span>

@@ -4,6 +4,7 @@ const sizes = {
   sm: '20px',
   md: '26px',
   lg: '34px',
+  xl: '40px',
 };
 
 const colors = {
