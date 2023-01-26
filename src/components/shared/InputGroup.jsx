@@ -12,6 +12,7 @@ const InputGroup = ({
   name,
   label,
   value,
+  type, 
   error,
   onChange,
   onFocus,
@@ -22,6 +23,7 @@ const InputGroup = ({
     <Input
       value={value}
       name={name}
+      type={type}
       id={name}
       onChange={onChange}
       onFocus={onFocus}
