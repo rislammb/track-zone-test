@@ -56,7 +56,7 @@ const Clock = ({ adminClock, clock, openModal, deleteClock }) => {
         </Button>
       </Flex>
       <Title size={'lg'} color={'primary'}>
-        { getHours(time) : getMinutes(time) : getSeconds(time) }
+        { getHours(time) } : { getMinutes(time) } : { getSeconds(time) }
       </Title>
       <Title size={'sm'}>{clock ? clock.title : adminClock.title}</Title>
       <Text ta={'center'}>{JSON.parse(clock ? clock.timeZone : adminClock.timeZone).title}({
