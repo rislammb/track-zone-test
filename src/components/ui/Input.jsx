@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const Input = styled.input.attrs((props) => ({
   // we can define static props
-  type: 'text',
+  type: props.type || 'text',
 
   // or we can define dynamic ones
   size: props.size || '4px 8px',
@@ -14,6 +14,7 @@ const Input = styled.input.attrs((props) => ({
   border-radius: 3px;
 
   /* here we use the dynamically computed prop */
+  type: ${(props) => props.type};
   padding: ${(props) => props.size};
 `;
 
