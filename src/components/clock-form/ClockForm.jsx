@@ -7,6 +7,7 @@ import Flex from '../ui/Flex';
 import Form from '../ui/Form';
 import Modal from '../ui/Modal';
 import Title from '../ui/Title';
+import Label from '../ui/Label';
 
 import timeDifferences from '../../data/timeDifferences';
 import timeZones from '../../data/timeZones';
@@ -72,9 +73,10 @@ const ClockForm = ({
             onFocus={handleFocus}
             onBlur={handleBlur}
           />
+
+          <Label>Time Zone</Label>
           <Select
             value={state.timeZone.value}
-            label={'Time Zone'}
             name='timeZone'
             onChange={handleChange}
           >
@@ -85,9 +87,9 @@ const ClockForm = ({
             ))}
           </Select>
 
+          <Label>Time Difference</Label>
           <Select
             value={state.difference.value}
-            label={'Time Difference'}
             name='difference'
             onChange={handleChange}
           >
