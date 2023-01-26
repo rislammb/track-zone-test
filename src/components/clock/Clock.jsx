@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { addMinutes, subMinutes, getHours, getMinutes, getSeconds } from 'date-fns'
 
 import useClock from '../../hooks/useClock';
 import EventForm from '../event-form/EventForm';
@@ -21,19 +22,20 @@ const Clock = ({ adminClock, clock, openModal, deleteClock }) => {
     closeModal,
   } = useClock();
 
-  const [time, setTime] = useState({
-    hours: new Date().getUTCHours(),
-    minutes: new Date().getUTCMinutes(),
-    seconds: new Date().getUTCSeconds(),
-  });
+  // const [time, setTime] = useState({
+  //  hours: new Date().getUTCHours(),
+   // minutes: new Date().getUTCMinutes(),
+  //  seconds: new Date().getUTCSeconds(),
+ // });
+
+  const minutesFromUTC = JSON.parse(clock.timeZone)?.minutes + JSON.parse(clock.difference)?.minutes;
+  const initial = minutesFromUTC > -1 ? addMinutes(new Date(), minutesFromUTC) : subMinutes(new Date(), minutesFromUTC);
+  const [time, setTime] = useState(initial);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setTime({
-        hours: new Date().getUTCHours(),
-        minutes: new Date().getUTCMinutes(),
-        seconds: new Date().getUTCSeconds(),
-      });
+      const newDate = minutesFromUTC > -1 ? addMinutes(new Date(), minutesFromUTC) : subMinutes(new Date(), minutesFromUTC);
+      setTime(newDate);
     }, 1000);
 
     return () => {
@@ -54,7 +56,7 @@ const Clock = ({ adminClock, clock, openModal, deleteClock }) => {
         </Button>
       </Flex>
       <Title size={'lg'} color={'primary'}>
-        {time.hours} : {time.minutes} : {time.seconds}
+        { getHours(time) : getMinutes(time) : getSeconds(time) }
       </Title>
       <Title size={'sm'}>{clock ? clock.title : adminClock.title}</Title>
       <Text ta={'center'}>{JSON.parse(clock ? clock.timeZone : adminClock.timeZone).title}({
