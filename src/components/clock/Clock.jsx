@@ -29,6 +29,7 @@ const Clock = ({ adminClock, clock, openModal, deleteClock }) => {
  // });
 
   const minutesFromUTC = JSON.parse(clock ? clock.timeZone: adminClock.timeZone)?.minutes + JSON.parse(clock ? clock.difference : adminClock.difference)?.minutes;
+alert(JSON.parse(clock ? clock.timeZone: adminClock.timeZone)?.minutes, JSON.parse(clock ? clock.difference : adminClock.difference)?.minutes)
   const initial = minutesFromUTC > -1 ? addMinutes(new Date(), minutesFromUTC) : subMinutes(new Date(), minutesFromUTC);
   const [time, setTime] = useState(initial);
 
