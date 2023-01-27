@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import useApp from '../../hooks/useApp';
 import ClockForm from '../clock-form/ClockForm';
 import Clock from '../clock/Clock';
+import EventForm from '../event-form/EventForm';
 
 import Button from '../ui/Button';
 import Flex from '../ui/Flex';
@@ -16,6 +17,9 @@ const App = () => {
     deleteClock,
     openModal,
     closeModal,
+    addEvent,
+    editEvent,
+    deleteEvent,
   } = useApp();
   const [date, setDate] = useState(new Date().toUTCString());
 
@@ -39,6 +43,10 @@ const App = () => {
           adminClock={state.adminClock}
           date={date}
           openModal={openModal}
+          events={state.events.filter(event => event.clockId === 'admin')}
+          addEvent={addEvent}
+          editEvent={editEvent}
+          deleteEvent={deleteEvent}
         />
         <Button fs={'18px'} p={'8px 24px'} onClick={openModal}>
           Add Clock
@@ -55,17 +63,28 @@ const App = () => {
               date={date}
               openModal={openModal}
               deleteClock={deleteClock}
+              events={state.events.filter(event => event.clockId === clockId)}
+              addEvent={addEvent}
+              editEvent={editEvent}
+              deleteEvent={deleteEvent}
             />
           ))}
       </Flex>
 
-      {state.open && (
+      {state.open && state.openedClock ? (
         <ClockForm
           addClock={addClock}
           editAdminClock={editAdminClock}
           editClock={editClock}
           closeModal={closeModal}
           openedClock={state.openedClock}
+        />
+      ) : (
+        <EventForm
+          addEvent={addEvent}
+          editEvent={editEvent}
+          closeModal={closeModal}
+          openedEvent={state.openedEvent}
         />
       )}
     </div>
