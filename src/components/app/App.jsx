@@ -21,17 +21,17 @@ const App = () => {
     editEvent,
     deleteEvent,
   } = useApp();
-  const [date, setDate] = useState(new Date().toUTCString());
+  // const [date, setDate] = useState(new Date().toUTCString());
 
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setDate(new Date().toUTCString());
-    }, 1000);
-
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, []);
+ // useEffect(() => {
+   // const intervalId = setInterval(() => {
+  //    setDate(new Date().toUTCString());
+ //   }, 1000);
+//
+   // return () => {
+  //    clearInterval(intervalId);
+  //  };
+ // }, []);
 
   return (
     <div className='app'>
@@ -42,7 +42,7 @@ const App = () => {
         <Clock
           adminClock={state.adminClock}
         
-          date={date}
+         // date={date}
           openFor={state.openFor}
           openModal={openModal}
           closeModal={closeModal}
