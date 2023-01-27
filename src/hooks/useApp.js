@@ -84,20 +84,24 @@ const useApp = () => {
 
     oldState.openFor = openFor;
     if (openFor === 'clock') {
-      if (id === 'admin') {
-        oldState.openedClock = oldState.adminClock;
-      } else {
-        const index = oldState.clocks.findIndex((clock) => clock.id === id);
+      if (id) {
+        if (id === 'admin') {
+          oldState.openedClock = oldState.adminClock;
+        } else {
+          const index = oldState.clocks.findIndex((clock) => clock.id === id);
 
-        if (index > -1) {
-          oldState.openedClock = oldState.clocks[index];
+          if (index > -1) {
+            oldState.openedClock = oldState.clocks[index];
+          }
         }
       }
     } else {
-      const index = oldState.events.findIndex((event) => event.id === id);
+      if (id) {
+        const index = oldState.events.findIndex((event) => event.id === id);
 
-      if (index > -1) {
-        oldState.openedEvent = oldState.events[index];
+        if (index > -1) {
+          oldState.openedEvent = oldState.events[index];
+        }
       }
     }
 
