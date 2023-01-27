@@ -12,7 +12,7 @@ import Span from '../ui/Span';
 import Text from '../ui/Text';
 import Title from '../ui/Title';
 
-const Clock = ({ adminClock, clock, date, openFor, openModal, closeModal, deleteClock, events, addEvent, editEvent, deleteEvent, openedEvent }) => {
+const Clock = ({ adminClock, clock, clockId, date, openFor, openModal, closeModal, deleteClock, events, addEvent, editEvent, deleteEvent, openedEvent }) => {
   const time = addMinutes(new Date(date), minutesFromUTC(clock ?? adminClock));
 
   const [, day, month, year] = time.toUTCString().split(' ');
@@ -75,7 +75,7 @@ const Clock = ({ adminClock, clock, date, openFor, openModal, closeModal, delete
 
       {openFor && openFor === 'event' && 
         <EventForm
-          clockId={clock ? clock.id : 'admin'}
+          clockId={clockId}
           addEvent={addEvent}
           editEvent={editEvent}
           closeModal={closeModal}
