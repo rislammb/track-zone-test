@@ -119,8 +119,23 @@ const useApp = () => {
     setState((prev) => ({
       ...prev,
       events: [...prev.events, newEvent],
-      open: false,
     }));
+  };
+
+  const editEvent = (clockId, id, { title, date, time }) => {
+    if (title || date || time) {
+    const oldState = JSON.parse(JSON.stringify(state));
+    const index = oldState.events.findIndex((event) => event.id === id && event.clockId === clockId);
+
+    if (index > -1) {
+      if (title) oldState.events[index].title = title;
+      if (date) oldState.events[index].date = date;
+      if (time) oldState.events[index].time = time;
+    }
+    oldState.openedEvent = null;
+
+    setState(oldState);
+    }
   };
 
   useEffect(() => {
