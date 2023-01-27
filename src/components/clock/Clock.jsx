@@ -66,13 +66,22 @@ const Clock = ({ adminClock, clock, date, openModal, deleteClock, events, addEve
           events.map((event) => (
             <Event
               key={event.id}
-              clockId={clock ? clock.id : 'admin'}
               event={event}
               openModal={openModal}
               deleteEvent={deleteEvent}
             />
           ))}
       </Flex>
+
+      {state.openFor && state.openFor = 'event' && 
+        <EventForm
+          clockId={clock ? clock.id : 'admin'}
+          addEvent={addEvent}
+          editEvent={editEvent}
+          closeModal={closeModal}
+          openedEvent={state.openedEvent}
+        />
+      }
     </Card>
   );
 };
