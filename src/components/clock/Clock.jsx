@@ -47,7 +47,7 @@ const Clock = ({ adminClock, clock, date, openModal, deleteClock }) => {
       </Title>
       <Title size={'sm'}>{clock ? clock.title : adminClock.title}</Title>
       <Text ta={'center'}>
-        {format(time, 'dd mmm yyyy')}
+        {format(time, 'dd MMM yyyy')} - 
         {JSON.parse(clock ? clock.timeZone : adminClock.timeZone)?.title}(
         {JSON.parse(clock ? clock.difference : adminClock.difference)?.title})
       </Text>
