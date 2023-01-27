@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { addMinutes, format,  formatDistance } from 'date-fns';
 import { addZeroFrist, getAmPm, getHours, minutesFromUTC } from '../../utils';
 
@@ -12,10 +13,22 @@ import Span from '../ui/Span';
 import Text from '../ui/Text';
 import Title from '../ui/Title';
 
-const Clock = ({ adminClock, clock, clockId, date, openFor, openModal, closeModal, deleteClock, events, addEvent, editEvent, deleteEvent, openedEvent }) => {
+const Clock = ({ adminClock, clock, clockId, openFor, openModal, closeModal, deleteClock, events, addEvent, editEvent, deleteEvent, openedEvent }) => {
+  const [date, setDate] = useState(new Date().toUTCString());
+
   const time = addMinutes(new Date(date), minutesFromUTC(clock ?? adminClock));
 
   const [, day, month, year] = time.toUTCString().split(' ');
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setDate(new Date().toUTCString());
+    }, 1000);
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
 
   return (
     <Card p={2} fb={'320px'} mw={'450px'} fg={'1'}>
