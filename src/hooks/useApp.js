@@ -10,7 +10,7 @@ const initial = {
   openedClock: null,
   events: [],
   openedEvent: null,
-  open: false,
+  openFor: '', // clock or event
 
 };
 
@@ -32,39 +32,39 @@ const useApp = () => {
     setState((prev) => ({
       ...prev,
       clocks: [...prev.clocks, newClock],
-      open: false,
+      openFor: '',
     }));
   };
 
   const editAdminClock = ({ title, timeZone, difference }) => {
-    const newClock = {
-      title: title ?? state.openedClock.title,
-      timeZone: timeZone ?? state.openedClock.timeZone,
-      difference: difference ?? state.openedClock.difference,
-    };
+    if (title || timeZone || difference) {
+      const oldState = JSON.parse(JSON.stringify(state));
 
-    setState((prev) => ({
-      ...prev,
-      adminClock: newClock,
-      open: false,
-      openedClock: null,
-    }));
+      if (title) oldState.adminClock.title = title;
+      if (timeZone) oldState.adminClock.timeZone = timeZone;
+      if (difference) oldState.adminClock.difference = difference;
+
+      oldState.openFor = '';
+      oldState.openedClock = null;
+
+      setState(oldState);
+    }
   };
 
   const editClock = (id, { title, timeZone, difference }) => {
     if (title || timeZone || difference) {
-    const oldState = JSON.parse(JSON.stringify(state));
-    const index = oldState.clocks.findIndex((clock) => clock.id === id);
+      const oldState = JSON.parse(JSON.stringify(state));
+      const index = oldState.clocks.findIndex((clock) => clock.id === id);
 
-    if (index > -1) {
-      if (title) oldState.clocks[index].title = title;
-      if (timeZone) oldState.clocks[index].timeZone = timeZone;
-      if (difference) oldState.clocks[index].difference = difference;
-    }
-    oldState.open = false;
-    oldState.openedClock = null;
+      if (index > -1) {
+        if (title) oldState.clocks[index].title = title;
+        if (timeZone) oldState.clocks[index].timeZone = timeZone;
+        if (difference) oldState.clocks[index].difference = difference;
+      }
+      oldState.openFor = '';
+      oldState.openedClock = null;
 
-    setState(oldState);
+      setState(oldState);
     }
   };
 
@@ -79,34 +79,35 @@ const useApp = () => {
     setState(oldState);
   };
 
-  const openModal = (id, event) => {
+  const openModal = (openFor, id) => {
     const oldState = JSON.parse(JSON.stringify(state));
 
-    oldState.open = true;
-  if (event) {
+    oldState.openFor = openFor;
+    if (openFor === 'clock') {
+      if (id === 'admin') {
+        oldState.openedClock = oldState.adminClock;
+      } else {
+        const index = oldState.clocks.findIndex((clock) => clock.id === id);
+
+        if (index > -1) {
+          oldState.openedClock = oldState.clocks[index];
+        }
+      }
+    } else {
       const index = oldState.events.findIndex((event) => event.id === id);
 
       if (index > -1) {
         oldState.openedEvent = oldState.events[index];
       }
-  } else {
-    if (id === 'admin') {
-      oldState.openedClock = oldState.adminClock;
-    } else {
-      const index = oldState.clocks.findIndex((clock) => clock.id === id);
-
-      if (index > -1) {
-        oldState.openedClock = oldState.clocks[index];
-      }
     }
-  }
+
     setState(oldState);
   };
 
   const closeModal = () => {
     setState((prev) => ({
       ...prev,
-      open: false,
+      openFor: '',
       openedClock: null,
       openedEvent: null,
     }));
@@ -129,18 +130,19 @@ const useApp = () => {
 
   const editEvent = (id, { title, date, time }) => {
     if (title || date || time) {
-    const oldState = JSON.parse(JSON.stringify(state));
-    const index = oldState.events.findIndex((event) => event.id === id);
+      const oldState = JSON.parse(JSON.stringify(state));
+      const index = oldState.events.findIndex((event) => event.id === id);
 
-    if (index > -1) {
-      if (title) oldState.events[index].title = title;
-      if (date) oldState.events[index].date = date;
-      if (time) oldState.events[index].time = time;
-    }
-    oldState.open = false; 
-    oldState.openedEvent = null;
+      if (index > -1) {
+        if (title) oldState.events[index].title = title;
+        if (date) oldState.events[index].date = date;
+        if (time) oldState.events[index].time = time;
+      }
 
-    setState(oldState);
+      oldState.openFor = ''; 
+      oldState.openedEvent = null;
+
+      setState(oldState);
     }
   };
 
