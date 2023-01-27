@@ -71,20 +71,20 @@ const App = () => {
           ))}
       </Flex>
 
-      {state.open && state.openedClock ? (
+      {state.open && state.open = 'event' ? (
+        <EventForm
+          addEvent={addEvent}
+          editEvent={editEvent}
+          closeModal={closeModal}
+          openedEvent={state.openedEvent}
+        />
+      ) : (
         <ClockForm
           addClock={addClock}
           editAdminClock={editAdminClock}
           editClock={editClock}
           closeModal={closeModal}
           openedClock={state.openedClock}
-        />
-      ) : (
-        <EventForm
-          addEvent={addEvent}
-          editEvent={editEvent}
-          closeModal={closeModal}
-          openedEvent={state.openedEvent}
         />
       )}
     </div>
