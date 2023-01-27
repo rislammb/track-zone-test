@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import useApp from '../../hooks/useApp';
 import ClockForm from '../clock-form/ClockForm';
-import EventForm from '../clock-form/EventForm';
+import EventForm from '../event-form/EventForm';
 import Clock from '../clock/Clock';
 
 import Button from '../ui/Button';
