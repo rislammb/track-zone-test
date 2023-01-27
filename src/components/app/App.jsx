@@ -48,7 +48,7 @@ const App = () => {
           editEvent={editEvent}
           deleteEvent={deleteEvent}
         />
-        <Button fs={'18px'} p={'8px 24px'} onClick={openModal}>
+        <Button fs={'18px'} p={'8px 24px'} onClick={ () => openModal('clock') }>
           Add Clock
         </Button>
       </Flex>
