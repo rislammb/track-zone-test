@@ -27,7 +27,7 @@ const Clock = ({ adminClock, clock, date, openModal, deleteClock, events, addEve
         ) : (
           <span></span>
         )}
-        <Button onClick={() => openModal(clock ? clock.id : 'admin')}>
+        <Button onClick={() => openModal('clock', clock ? clock.id : 'admin')}>
           Edit
         </Button>
       </Flex>
@@ -66,6 +66,7 @@ const Clock = ({ adminClock, clock, date, openModal, deleteClock, events, addEve
           events.map((event) => (
             <Event
               key={event.id}
+              clockId={clock ? clock.id : 'admin'}
               event={event}
               openModal={openModal}
               deleteEvent={deleteEvent}
