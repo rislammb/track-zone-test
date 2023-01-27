@@ -52,22 +52,20 @@ const useApp = () => {
   };
 
   const editClock = (id, { title, timeZone, difference }) => {
-    const newClock = {
-      title: title ?? state.openedClock.title,
-      timeZone: timeZone ?? state.openedClock.timeZone,
-      difference: difference ?? state.openedClock.difference,
-    };
-
+    if (title || timeZone || difference) {
     const oldState = JSON.parse(JSON.stringify(state));
     const index = oldState.clocks.findIndex((clock) => clock.id === id);
 
     if (index > -1) {
-      oldState.clocks[index] = { id, ...newClock };
+      if (title) oldState.clocks[index].title = title;
+      if (timeZone) oldState.clocks[index].timeZone = timeZone;
+      if (difference) oldState.clocks[index].difference = difference;
     }
     oldState.open = false;
     oldState.openedClock = null;
 
     setState(oldState);
+    }
   };
 
   const deleteClock = (id) => {
@@ -81,10 +79,17 @@ const useApp = () => {
     setState(oldState);
   };
 
-  const openModal = (id) => {
+  const openModal = (id, event) => {
     const oldState = JSON.parse(JSON.stringify(state));
 
     oldState.open = true;
+  if (event) {
+      const index = oldState.events.findIndex((event) => event.id === id);
+
+      if (index > -1) {
+        oldState.openedEvent = oldState.events[index];
+      }
+  } else {
     if (id === 'admin') {
       oldState.openedClock = oldState.adminClock;
     } else {
@@ -94,7 +99,7 @@ const useApp = () => {
         oldState.openedClock = oldState.clocks[index];
       }
     }
-
+  }
     setState(oldState);
   };
 
@@ -122,20 +127,32 @@ const useApp = () => {
     }));
   };
 
-  const editEvent = (clockId, id, { title, date, time }) => {
+  const editEvent = (id, { title, date, time }) => {
     if (title || date || time) {
     const oldState = JSON.parse(JSON.stringify(state));
-    const index = oldState.events.findIndex((event) => event.id === id && event.clockId === clockId);
+    const index = oldState.events.findIndex((event) => event.id === id);
 
     if (index > -1) {
       if (title) oldState.events[index].title = title;
       if (date) oldState.events[index].date = date;
       if (time) oldState.events[index].time = time;
     }
+    oldState.open = false; 
     oldState.openedEvent = null;
 
     setState(oldState);
     }
+  };
+
+  const deleteEvent = (id) => {
+    const oldState = JSON.parse(JSON.stringify(state));
+    const index = oldState.events.findIndex((event) => event.id === id);
+
+    if (index > -1) {
+      oldState.events.splice(index, 1);
+    }
+
+    setState(oldState);
   };
 
   useEffect(() => {
@@ -150,7 +167,9 @@ const useApp = () => {
     deleteClock,
     openModal,
     closeModal,
-    addEvent, 
+    addEvent,
+    editEvent,
+    deleteEvent,
   };
 };
 
