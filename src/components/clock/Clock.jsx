@@ -73,7 +73,7 @@ const Clock = ({ adminClock, clock, date, openModal, deleteClock, events, addEve
           ))}
       </Flex>
 
-      {state.openFor && state.openFor = 'event' && 
+      {state.openFor && state.openFor === 'event' && 
         <EventForm
           clockId={clock ? clock.id : 'admin'}
           addEvent={addEvent}
