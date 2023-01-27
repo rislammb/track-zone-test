@@ -7,8 +7,11 @@ const initial = {
     difference: JSON.stringify({ title: '00:00', minutes: 0 }),
   },
   clocks: [],
-  open: false,
   openedClock: null,
+  events: [],
+  openedEvent: null,
+  open: false,
+
 };
 
 const useApp = () => {
@@ -100,6 +103,23 @@ const useApp = () => {
       ...prev,
       open: false,
       openedClock: null,
+      openedEvent: null,
+    }));
+  };
+
+  const addEvent = (clockId, { title, date, time }) => {
+    const newEvent = {
+      clockId,
+      id: Math.random() + '-' + Math.random(),
+      title,
+      date,
+      time,
+    };
+
+    setState((prev) => ({
+      ...prev,
+      events: [...prev.events, newEvent],
+      open: false,
     }));
   };
 
@@ -115,6 +135,7 @@ const useApp = () => {
     deleteClock,
     openModal,
     closeModal,
+    addEvent, 
   };
 };
 
