@@ -129,6 +129,7 @@ const useApp = () => {
     setState((prev) => ({
       ...prev,
       events: [...prev.events, newEvent],
+      openFor: '',
     }));
   };
 
