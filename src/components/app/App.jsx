@@ -40,6 +40,7 @@ const App = () => {
       <Flex ai={'start'}>
         <Clock
           adminClock={state.adminClock}
+          clockId={'admin'}
           date={date}
           openFor={state.openFor}
           openModal={openModal}
@@ -62,6 +63,7 @@ const App = () => {
               key={clock.id}
               adminClock={state.adminClock}
               clock={clock}
+              clockId={clock.id}
               date={date}
               openFor={state.openFor}
               openModal={openModal}
