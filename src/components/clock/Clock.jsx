@@ -13,16 +13,7 @@ import Span from '../ui/Span';
 import Text from '../ui/Text';
 import Title from '../ui/Title';
 
-const Clock = ({ adminClock, clock, date, openModal, deleteClock }) => {
-  const {
-    state,
-    addEvent,
-    editEvent,
-    deleteEvent,
-    openModal: openEventModal,
-    closeModal,
-  } = useClock();
-
+const Clock = ({ adminClock, clock, date, openModal, deleteClock, events, addEvent, editEvent, deleteEvent }) => {
   const time = addMinutes(new Date(date), minutesFromUTC(clock ?? adminClock));
 
   const [, day, month, year] = time.toUTCString().split(' ');
@@ -68,29 +59,20 @@ const Clock = ({ adminClock, clock, date, openModal, deleteClock }) => {
       <Hr />
       <Flex jc={'space-between'} m={'8px 0px'} ai={'center'}>
         <Text>Events:</Text>
-        <Button onClick={openEventModal}>Add</Button>
+        <Button onClick={() => openModal('event')}>Add</Button>
       </Flex>
 
       <Flex fd={'column'}>
-        {state.events.length > 0 &&
-          state.events.map((event) => (
+        {events.length > 0 &&
+          events.map((event) => (
             <Event
               key={event.id}
               event={event}
-              openModal={openEventModal}
+              openModal={openModal}
               deleteEvent={deleteEvent}
             />
           ))}
       </Flex>
-
-      {state.open && (
-        <EventForm
-          addEvent={addEvent}
-          editEvent={editEvent}
-          closeModal={closeModal}
-          openedEvent={state.openedEvent}
-        />
-      )}
     </Card>
   );
 };
