@@ -1,7 +1,6 @@
 import { addMinutes, format,  formatDistance } from 'date-fns';
 import { addZeroFrist, getAmPm, getHours, minutesFromUTC } from '../../utils';
 
-import useClock from '../../hooks/useClock';
 import EventForm from '../event-form/EventForm';
 import Event from '../event/Event';
 
