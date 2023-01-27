@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import useApp from '../../hooks/useApp';
 import ClockForm from '../clock-form/ClockForm';
+import EventForm from '../clock-form/EventForm';
 import Clock from '../clock/Clock';
 
 import Button from '../ui/Button';
@@ -40,7 +41,7 @@ const App = () => {
       <Flex ai={'start'}>
         <Clock
           adminClock={state.adminClock}
-          clockId={'admin'}
+        
           date={date}
           openFor={state.openFor}
           openModal={openModal}
@@ -59,12 +60,13 @@ const App = () => {
       <Flex gap={'16px'}>
         {state.clocks.length > 0 &&
           state.clocks.map((clock) => (
+<>
             <Clock
               key={clock.id}
               adminClock={state.adminClock}
               clock={clock}
-              clockId={clock.id}
-              date={date}
+              
+              
               openFor={state.openFor}
               openModal={openModal}
               closeModal={closeModal}
@@ -75,6 +77,16 @@ const App = () => {
               deleteEvent={deleteEvent}
               openedEvent={state.openedEvent}
             />
+      {state.openFor && state.openFor === 'event' && 
+        <EventForm
+          clockId={clock.id}
+          addEvent={addEvent}
+          editEvent={editEvent}
+          closeModal={closeModal}
+          openedEvent={openedEvent}
+        />
+      }
+</>
           ))}
       </Flex>
 
