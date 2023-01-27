@@ -54,7 +54,7 @@ const Clock = ({ adminClock, clock, date, openModal, deleteClock }) => {
         {JSON.parse(clock ? clock.difference : adminClock.difference)?.title})
       </Text>
       {clock && (
-        <Text ta={'center'} color={'secondary'}>
+        <Text size={'sm'} ta={'center'} color={'secondary'}>
           {formatDistance(
             addMinutes(new Date(date), minutesFromUTC(clock)),
             addMinutes(new Date(date), minutesFromUTC(adminClock)),
