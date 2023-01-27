@@ -32,6 +32,8 @@ const EventForm = ({ clockId, addEvent, editEvent, closeModal, openedEvent }) =>
         time: '',
       };
 
+  alert(clockId)
+
   const { state, handleChange, handleFocus, handleBlur, handleSubmit } =
     useForm(initial, validate);
 
