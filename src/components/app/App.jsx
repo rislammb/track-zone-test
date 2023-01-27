@@ -68,7 +68,7 @@ const App = () => {
               addEvent={addEvent}
               editEvent={editEvent}
               deleteEvent={deleteEvent}
-              openedEvent={openedEvent}
+              openedEvent={state.openedEvent}
             />
           ))}
       </Flex>
