@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import useApp from '../../hooks/useApp';
 import ClockForm from '../clock-form/ClockForm';
 import Clock from '../clock/Clock';
-import EventForm from '../event-form/EventForm';
 
 import Button from '../ui/Button';
 import Flex from '../ui/Flex';
@@ -71,7 +70,7 @@ const App = () => {
           ))}
       </Flex>
 
-      {state.openFor && (state.openFor = 'clock' ? (
+      {state.openFor && state.openFor = 'clock' &&
         <ClockForm
           addClock={addClock}
           editAdminClock={editAdminClock}
@@ -79,14 +78,7 @@ const App = () => {
           closeModal={closeModal}
           openedClock={state.openedClock}
         />
-      ) : (
-        <EventForm
-          addEvent={addEvent}
-          editEvent={editEvent}
-          closeModal={closeModal}
-          openedEvent={state.openedEvent}
-        />
-      ))}
+      }
     </div>
   );
 };
