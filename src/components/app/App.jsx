@@ -60,12 +60,15 @@ const App = () => {
               adminClock={state.adminClock}
               clock={clock}
               date={date}
+              openFor={state.openFor}
               openModal={openModal}
+              closeModal={closeModal}
               deleteClock={deleteClock}
-              events={state.events.filter(event => event.clockId === clockId)}
+              events={state.events.filter(event => event.clockId === clock.id)}
               addEvent={addEvent}
               editEvent={editEvent}
               deleteEvent={deleteEvent}
+              openedEvent={openedEvent}
             />
           ))}
       </Flex>
