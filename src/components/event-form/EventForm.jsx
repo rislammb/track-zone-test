@@ -19,7 +19,7 @@ const validate = (values) => {
   return { valid: Object.keys(errors).length === 0, errors };
 };
 
-const EventForm = ({ addEvent, editEvent, closeModal, openedEvent }) => {
+const EventForm = ({ clockId, addEvent, editEvent, closeModal, openedEvent }) => {
   const initial = openedEvent
     ? {
         title: openedEvent.title,
@@ -39,7 +39,7 @@ const EventForm = ({ addEvent, editEvent, closeModal, openedEvent }) => {
     if (openedEvent) {
       editEvent(openedEvent.id, { ...values });
     } else {
-      addEvent({ ...values });
+      addEvent(clockId, { ...values });
     }
   };
 
@@ -61,7 +61,7 @@ const EventForm = ({ addEvent, editEvent, closeModal, openedEvent }) => {
             value={state.date.value}
             error={state.date.error}
             label={'Date'}
-type='date'
+            type='date'
             name={state.date.name}
             onChange={handleChange}
             onFocus={handleFocus}
@@ -71,7 +71,7 @@ type='date'
             value={state.time.value}
             error={state.time.error}
             label={'Time'}
-type='time'
+            type='time'
             name={state.time.name}
             onChange={handleChange}
             onFocus={handleFocus}
