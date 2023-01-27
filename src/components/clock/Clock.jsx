@@ -25,6 +25,8 @@ const Clock = ({ adminClock, clock, date, openModal, deleteClock }) => {
 
   const time = addMinutes(new Date(date), minutesFromUTC(clock ?? adminClock));
 
+  const [, day, month, year] = time.toUTCString().split(' ');
+
   return (
     <Card p={2} fb={'320px'} mw={'450px'} fg={'1'}>
       <Flex jc={'space-between'}>
@@ -47,7 +49,7 @@ const Clock = ({ adminClock, clock, date, openModal, deleteClock }) => {
       </Title>
       <Title size={'sm'}>{clock ? clock.title : adminClock.title}</Title>
       <Text ta={'center'}>
-        {format(time, 'dd MMM yyyy')} - 
+        {`${day} ${month} ${year}`} - {' '}
         {JSON.parse(clock ? clock.timeZone : adminClock.timeZone)?.title}(
         {JSON.parse(clock ? clock.difference : adminClock.difference)?.title})
       </Text>
