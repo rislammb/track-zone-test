@@ -41,11 +41,14 @@ const App = () => {
         <Clock
           adminClock={state.adminClock}
           date={date}
+          openFor={state.openFor}
           openModal={openModal}
+          closeModal={closeModal}
           events={state.events.filter(event => event.clockId === 'admin')}
           addEvent={addEvent}
           editEvent={editEvent}
           deleteEvent={deleteEvent}
+          openedEvent={state.openedEvent}
         />
         <Button fs={'18px'} p={'8px 24px'} onClick={ () => openModal('clock') }>
           Add Clock
