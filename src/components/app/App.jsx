@@ -83,7 +83,7 @@ const App = () => {
           addEvent={addEvent}
           editEvent={editEvent}
           closeModal={closeModal}
-          openedEvent={openedEvent}
+          openedEvent={state.openedEvent}
         />
       }
 </>
