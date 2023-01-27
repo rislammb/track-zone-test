@@ -25,7 +25,7 @@ const Event = ({ event, openModal, deleteEvent }) => {
         >
           Delete
         </Button>
-        <Button onClick={() => openModal(event.id)} fs={'13px'} p={'3px 8px'}>
+        <Button onClick={() => openModal('event', event.id)} fs={'13px'} p={'3px 8px'}>
           Edit
         </Button>
       </Flex>
