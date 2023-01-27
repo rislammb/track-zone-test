@@ -70,7 +70,7 @@ const App = () => {
           ))}
       </Flex>
 
-      {(state.openFor && state.openFor = 'clock') &&
+      {(state.openFor !== '' && state.openFor = 'clock') &&
         <ClockForm
           addClock={addClock}
           editAdminClock={editAdminClock}
