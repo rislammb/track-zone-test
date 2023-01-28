@@ -1,8 +1,6 @@
-import { useEffect, useState } from 'react';
 import { addMinutes, format,  formatDistance } from 'date-fns';
 import { addZeroFrist, getAmPm, getHours, minutesFromUTC } from '../../utils';
 
-import EventForm from '../event-form/EventForm';
 import Event from '../event/Event';
 
 import Button from '../ui/Button';
@@ -13,22 +11,10 @@ import Span from '../ui/Span';
 import Text from '../ui/Text';
 import Title from '../ui/Title';
 
-const Clock = ({ adminClock, clock, clockId, openFor, openModal, closeModal, deleteClock, events, addEvent, editEvent, deleteEvent, openedEvent }) => {
-  const [date, setDate] = useState(new Date().toUTCString());
-
+const Clock = ({ date, adminClock, clock, openModal, deleteClock, events, deleteEvent }) => {
   const time = addMinutes(new Date(date), minutesFromUTC(clock ?? adminClock));
 
   const [, day, month, year] = time.toUTCString().split(' ');
-
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setDate(new Date().toUTCString());
-    }, 1000);
-
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, []);
 
   return (
     <Card p={2} fb={'320px'} mw={'450px'} fg={'1'}>
@@ -71,13 +57,14 @@ const Clock = ({ adminClock, clock, clockId, openFor, openModal, closeModal, del
       <Hr />
       <Flex jc={'space-between'} m={'8px 0px'} ai={'center'}>
         <Text>Events:</Text>
-        <Button onClick={() => openModal('event')}>Add</Button>
+        <Button onClick={() => openModal('event',  clock ? clock.id : 'admin')}>Add</Button>
       </Flex>
 
       <Flex fd={'column'}>
         {events.length > 0 &&
           events.map((event) => (
             <Event
+              clockId={clock ? clock.id : 'admin'}
               key={event.id}
               event={event}
               openModal={openModal}
@@ -85,16 +72,6 @@ const Clock = ({ adminClock, clock, clockId, openFor, openModal, closeModal, del
             />
           ))}
       </Flex>
-
-      {openFor && openFor === 'event' && 
-        <EventForm
-          clockId={clockId}
-          addEvent={addEvent}
-          editEvent={editEvent}
-          closeModal={closeModal}
-          openedEvent={openedEvent}
-        />
-      }
     </Card>
   );
 };
