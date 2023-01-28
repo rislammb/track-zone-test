@@ -54,8 +54,8 @@ const Clock = ({
       {clock && (
         <Text size={'sm'} ta={'center'} color={'secondary'}>
           {formatDistance(
-            addMinutes(new Date(date), minutesFromUTC(clock)),
             addMinutes(new Date(date), minutesFromUTC(adminClock)),
+            addMinutes(new Date(date), minutesFromUTC(clock)),
             {
               addSuffix: true,
             }
