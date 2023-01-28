@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { generateId } from '../utils.js';
 
 const initial = {
   adminClock: {
@@ -23,7 +24,7 @@ const useApp = () => {
 
   const addClock = ({ title, timeZone, difference }) => {
     const newClock = {
-      id: Math.random() + '-' + Math.random(),
+      id: generateId(),
       title,
       timeZone,
       difference,
@@ -127,7 +128,7 @@ const useApp = () => {
   const addEvent = (clockId, { title, datetime }) => {
     const newEvent = {
       clockId,
-      id: Math.random() + '-' + Math.random(),
+      id: generateId(),
       title,
       datetime,
     };
