@@ -12,15 +12,14 @@ const initial = {
   events: [],
   openedEvent: null,
   openFor: '', // clock or event
-
 };
 
 const useApp = () => {
-  const initialState = localStorage.getItem('FSA-CLOCK')
-    ? JSON.parse(localStorage.getItem('FSA-CLOCK'))
-    : initial;
+  // const initialState = localStorage.getItem('FSA-CLOCK')
+  //   ? JSON.parse(localStorage.getItem('FSA-CLOCK'))
+  //   : initial;
 
-  const [state, setState] = useState(initialState);
+  const [state, setState] = useState(initial);
 
   const addClock = ({ title, timeZone, difference }) => {
     const newClock = {
@@ -75,7 +74,7 @@ const useApp = () => {
 
     if (index > -1) {
       oldState.clocks.splice(index, 1);
-      oldState.events.filter(event => event.clockId !== id);
+      oldState.events.filter((event) => event.clockId !== id);
     }
 
     setState(oldState);
@@ -90,7 +89,9 @@ const useApp = () => {
         if (clockId === 'admin') {
           oldState.openedClock = oldState.adminClock;
         } else {
-          const index = oldState.clocks.findIndex((clock) => clock.id === clockId);
+          const index = oldState.clocks.findIndex(
+            (clock) => clock.id === clockId
+          );
 
           if (index > -1) {
             oldState.openedClock = oldState.clocks[index];
@@ -100,7 +101,9 @@ const useApp = () => {
     } else {
       oldState.clockIdForEvent = clockId;
       if (eventId) {
-        const index = oldState.events.findIndex((event) => event.id === eventId);
+        const index = oldState.events.findIndex(
+          (event) => event.id === eventId
+        );
 
         if (index > -1) {
           oldState.openedEvent = oldState.events[index];
@@ -117,39 +120,37 @@ const useApp = () => {
       openFor: '',
       openedClock: null,
       openedEvent: null,
-      clockIdForEvent: null
+      clockIdForEvent: null,
     }));
   };
 
-  const addEvent = (clockId, { title, date, time }) => {
+  const addEvent = (clockId, { title, datetime }) => {
     const newEvent = {
       clockId,
       id: Math.random() + '-' + Math.random(),
       title,
-      date,
-      time,
+      datetime,
     };
 
     setState((prev) => ({
       ...prev,
       events: [...prev.events, newEvent],
       openFor: '',
-      clockIdForEvent: null
+      clockIdForEvent: null,
     }));
   };
 
-  const editEvent = (id, { title, date, time }) => {
-    if (title || date || time) {
+  const editEvent = (id, { title, datetime }) => {
+    if (title || datetime) {
       const oldState = JSON.parse(JSON.stringify(state));
       const index = oldState.events.findIndex((event) => event.id === id);
 
       if (index > -1) {
         if (title) oldState.events[index].title = title;
-        if (date) oldState.events[index].date = date;
-        if (time) oldState.events[index].time = time;
+        if (datetime) oldState.events[index].datetime = datetime;
       }
 
-      oldState.openFor = ''; 
+      oldState.openFor = '';
       oldState.openedEvent = null;
       oldState.clockIdForEvent = null;
 

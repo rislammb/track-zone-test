@@ -2,24 +2,16 @@ export const addZeroFrist = (number) => {
   return number > 9 ? `${number}` : `0${number}`;
 };
 
-export const getHours = (time) => {
-  return time.getUTCHours() === 0
-    ? 12
-    : time.getUTCHours() > 12
-    ? time.getUTCHours() - 12
-    : time.getUTCHours();
+export const addMinutesFN = (dateObj, minutes) => {
+  return new Date(new Date(dateObj).getTime() + minutes * 60 * 1000);
 };
 
-export const getAmPm = (time) => {
-  return time.getUTCHours() > 11 ? 'pm' : 'am';
+export const getHours = (hours) => {
+  return hours === 0 ? 12 : hours > 12 ? hours - 12 : hours;
 };
 
-export const getClockTime = (time) => {
-  return `
-    ${addZeroFrist(getHours(time))}:${addZeroFrist(
-    time.getUTCMinutes()
-  )}:${addZeroFrist(time.getUTCSeconds())} 
-    ${getAmPm(time)}`;
+export const getAmPm = (hours) => {
+  return hours > 11 ? 'pm' : 'am';
 };
 
 export const minutesFromUTC = (clock) => {

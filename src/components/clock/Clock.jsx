@@ -1,4 +1,4 @@
-import { addMinutes, format,  formatDistance } from 'date-fns';
+import { addMinutes, formatDistance } from 'date-fns';
 import { addZeroFrist, getAmPm, getHours, minutesFromUTC } from '../../utils';
 
 import Event from '../event/Event';
@@ -11,7 +11,15 @@ import Span from '../ui/Span';
 import Text from '../ui/Text';
 import Title from '../ui/Title';
 
-const Clock = ({ date, adminClock, clock, openModal, deleteClock, events, deleteEvent }) => {
+const Clock = ({
+  date,
+  adminClock,
+  clock,
+  openModal,
+  deleteClock,
+  events,
+  deleteEvent,
+}) => {
   const time = addMinutes(new Date(date), minutesFromUTC(clock ?? adminClock));
 
   const [, day, month, year] = time.toUTCString().split(' ');
@@ -31,14 +39,15 @@ const Clock = ({ date, adminClock, clock, openModal, deleteClock, events, delete
         </Button>
       </Flex>
       <Title size={'xl'} color={'primary'}>
-        {addZeroFrist(getHours(time))}:{addZeroFrist(time.getUTCMinutes())}
+        {addZeroFrist(getHours(time.getUTCHours()))}:
+        {addZeroFrist(time.getUTCMinutes())}
         <Span fs={'24px'}>
-          :{addZeroFrist(time.getUTCSeconds())} {getAmPm(time)}
+          :{addZeroFrist(time.getUTCSeconds())} {getAmPm(time.getUTCHours())}
         </Span>
       </Title>
       <Title size={'sm'}>{clock ? clock.title : adminClock.title}</Title>
       <Text ta={'center'}>
-        {`${day} ${month} ${year}`} - {' '}
+        {`${day} ${month} ${year}`} -{' '}
         {JSON.parse(clock ? clock.timeZone : adminClock.timeZone)?.title}(
         {JSON.parse(clock ? clock.difference : adminClock.difference)?.title})
       </Text>
@@ -57,14 +66,19 @@ const Clock = ({ date, adminClock, clock, openModal, deleteClock, events, delete
       <Hr />
       <Flex jc={'space-between'} m={'8px 0px'} ai={'center'}>
         <Text>Events:</Text>
-        <Button onClick={() => openModal('event',  clock ? clock.id : 'admin')}>Add</Button>
+        <Button onClick={() => openModal('event', clock ? clock.id : 'admin')}>
+          Add
+        </Button>
       </Flex>
 
       <Flex fd={'column'}>
-        {events.length > 0 &&
+        {events?.length > 0 &&
           events.map((event) => (
             <Event
               clockId={clock ? clock.id : 'admin'}
+              adminClock={adminClock}
+              clock={clock}
+              date={date}
               key={event.id}
               event={event}
               openModal={openModal}

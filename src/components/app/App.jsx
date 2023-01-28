@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import useApp from '../../hooks/useApp';
 import ClockForm from '../clock-form/ClockForm';
-import EventForm from '../event-form/EventForm';
 import Clock from '../clock/Clock';
+import EventForm from '../event-form/EventForm';
 
 import Button from '../ui/Button';
 import Flex from '../ui/Flex';
@@ -23,20 +23,20 @@ const App = () => {
   } = useApp();
   const [date, setDate] = useState(new Date().toUTCString());
 
- useEffect(() => {
-   const intervalId = setInterval(() => {
-    setDate(new Date().toUTCString());
-   }, 1000);
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setDate(new Date().toUTCString());
+    }, 1000);
 
-   return () => {
-     clearInterval(intervalId);
-   };
+    return () => {
+      clearInterval(intervalId);
+    };
   }, []);
 
   return (
     <div className='app'>
       <Title color={'primary'} size={'lg'} p={'12px 8px'}>
-        SL Track Zone
+        FSA Track Zone
       </Title>
       <Flex ai={'start'}>
         <Clock
@@ -44,10 +44,10 @@ const App = () => {
           date={date}
           openModal={openModal}
           closeModal={closeModal}
-          events={state.events.filter(event => event.clockId === 'admin')}
+          events={state.events?.filter((event) => event.clockId === 'admin')}
           deleteEvent={deleteEvent}
         />
-        <Button fs={'18px'} p={'8px 24px'} onClick={ () => openModal('clock') }>
+        <Button fs={'18px'} p={'8px 24px'} onClick={() => openModal('clock')}>
           Add Clock
         </Button>
       </Flex>
@@ -63,27 +63,32 @@ const App = () => {
               openModal={openModal}
               closeModal={closeModal}
               deleteClock={deleteClock}
-              events={state.events.filter(event => event.clockId === clock.id)}
+              events={state.events?.filter(
+                (event) => event.clockId === clock.id
+              )}
               deleteEvent={deleteEvent}
             />
           ))}
       </Flex>
 
-      { state.openFor && (state.openFor === 'clock' ? (<ClockForm
-          addClock={addClock}
-          editAdminClock={editAdminClock}
-          editClock={editClock}
-          closeModal={closeModal}
-          openedClock={state.openedClock}
-        />) : (
-        <EventForm
-          clockId={state.clockIdForEvent}
-          addEvent={addEvent}
-          editEvent={editEvent}
-          closeModal={closeModal}
-          openedEvent={state.openedEvent}
-        />))
-      }
+      {state.openFor &&
+        (state.openFor === 'clock' ? (
+          <ClockForm
+            addClock={addClock}
+            editAdminClock={editAdminClock}
+            editClock={editClock}
+            closeModal={closeModal}
+            openedClock={state.openedClock}
+          />
+        ) : (
+          <EventForm
+            clockId={state.clockIdForEvent}
+            addEvent={addEvent}
+            editEvent={editEvent}
+            closeModal={closeModal}
+            openedEvent={state.openedEvent}
+          />
+        ))}
     </div>
   );
 };

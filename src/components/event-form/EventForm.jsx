@@ -8,6 +8,18 @@ import Form from '../ui/Form';
 import Modal from '../ui/Modal';
 import Title from '../ui/Title';
 
+const initial = (openedEvent) => {
+  return openedEvent
+    ? {
+        title: openedEvent.title,
+        datetime: openedEvent.datetime,
+      }
+    : {
+        title: '',
+        datetime: '',
+      };
+};
+
 const validate = (values) => {
   const errors = {};
   Object.keys(values).forEach((key) => {
@@ -19,21 +31,15 @@ const validate = (values) => {
   return { valid: Object.keys(errors).length === 0, errors };
 };
 
-const EventForm = ({ clockId, addEvent, editEvent, closeModal, openedEvent }) => {
-  const initial = openedEvent
-    ? {
-        title: openedEvent.title,
-        date: openedEvent.date,
-        time: openedEvent.time,
-      }
-    : {
-        title: '',
-        date: '',
-        time: '',
-      };
-
+const EventForm = ({
+  clockId,
+  addEvent,
+  editEvent,
+  closeModal,
+  openedEvent,
+}) => {
   const { state, handleChange, handleFocus, handleBlur, handleSubmit } =
-    useForm(initial, validate);
+    useForm(initial(openedEvent), validate);
 
   const submit = (values) => {
     if (openedEvent) {
@@ -58,21 +64,11 @@ const EventForm = ({ clockId, addEvent, editEvent, closeModal, openedEvent }) =>
             onBlur={handleBlur}
           />
           <InputGroup
-            value={state.date.value}
-            error={state.date.error}
-            label={'Date'}
-            type='date'
-            name={state.date.name}
-            onChange={handleChange}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-          />
-          <InputGroup
-            value={state.time.value}
-            error={state.time.error}
-            label={'Time'}
-            type='time'
-            name={state.time.name}
+            value={state.datetime.value}
+            error={state.datetime.error}
+            label={'Date and Time'}
+            type={'datetime-local'}
+            name={state.datetime.name}
             onChange={handleChange}
             onFocus={handleFocus}
             onBlur={handleBlur}
