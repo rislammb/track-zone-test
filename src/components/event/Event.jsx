@@ -1,4 +1,4 @@
-import { addMinutes, formatDistance, subMinutes } from 'date-fns';
+import { addMinutes, formatDistance } from 'date-fns';
 import { addZeroFrist, getAmPm, getHours, minutesFromUTC } from '../../utils';
 
 import Button from '../ui/Button';
@@ -30,8 +30,8 @@ const Event = ({
           </Text>
           <Text p={'0px'} size={'sm'}>
             {formatDistance(
-            addMinutes(subMinutes(time, time.getTimezoneOffset()), minutesFromUTC(clock ?? adminClock)),
-            addMinutes(subMinutes(new Date(date), time.getTimezoneOffset()), minutesFromUTC(adminClock)),
+            addMinutes(addMinutes(time, time.getTimezoneOffset()), minutesFromUTC(clock ?? adminClock)),
+            addMinutes(addMinutes(new Date(date), time.getTimezoneOffset()), minutesFromUTC(adminClock)),
             {
               addSuffix: true,
             }
