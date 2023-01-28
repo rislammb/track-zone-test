@@ -2,7 +2,7 @@ import Button from '../ui/Button';
 import Flex from '../ui/Flex';
 import Text from '../ui/Text';
 
-const Event = ({ event, openModal, deleteEvent }) => {
+const Event = ({ clockId, event, openModal, deleteEvent }) => {
   return (
     <Flex fd={'column'}>
       <Text color={'warning'}>{event.title}</Text>
@@ -25,7 +25,7 @@ const Event = ({ event, openModal, deleteEvent }) => {
         >
           Delete
         </Button>
-        <Button onClick={() => openModal('event', event.id)} fs={'13px'} p={'3px 8px'}>
+        <Button onClick={() => openModal('event', clockId, event.id)} fs={'13px'} p={'3px 8px'}>
           Edit
         </Button>
       </Flex>
