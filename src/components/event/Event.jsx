@@ -1,4 +1,4 @@
-import { addMinutes } from 'date-fns';
+import { addMinutes, formatDistance, subMinutes } from 'date-fns';
 import { addZeroFrist, getAmPm, getHours, minutesFromUTC } from '../../utils';
 
 import Button from '../ui/Button';
@@ -17,48 +17,6 @@ const Event = ({
   const time = new Date(event.datetime);
   const [, day, month, year] = time.toUTCString().split(' ');
 
-  const getTimeDistance = () => {
-    const eventTime = addMinutes(
-      time,
-      clock ? minutesFromUTC(clock) : minutesFromUTC(adminClock)
-    ).getTime();
-
-    const adminTime = addMinutes(
-      new Date(date),
-      minutesFromUTC(adminClock)
-    ).getTime();
-
-    let minutes =
-      (eventTime - adminTime) / 1000 / 60 - time.getTimezoneOffset();
-
-    minutes =
-      minutes -
-      minutesFromUTC(adminClock) -
-      (clock ? minutesFromUTC(clock) : minutesFromUTC(adminClock));
-
-    let result = '';
-    if (minutes > 0) {
-      if (minutes > 60) {
-        result = `${Math.floor(minutes / 60)} hours and ${Math.floor(
-          minutes % 60
-        )} minutes ahead`;
-      } else {
-        result = `${Math.floor(minutes)} minutes ahead`;
-      }
-    } else if (minutes === 0) {
-      result = 'in this time';
-    } else {
-      if (minutes > -60) {
-        result = `${Math.abs(Math.floor(minutes))} minutes ago`;
-      } else {
-        result = `${Math.abs(Math.floor(minutes / 60))} hours and ${Math.abs(
-          Math.floor(minutes % 60)
-        )} minutes ago`;
-      }
-    }
-    return result;
-  };
-
   return (
     <Flex fd={'column'}>
       <Text color={'warning'}>{event.title}</Text>
@@ -71,7 +29,13 @@ const Event = ({
             {addZeroFrist(time.getMinutes())} {getAmPm(time.getHours())}
           </Text>
           <Text p={'0px'} size={'sm'}>
-            {getTimeDistance()}
+            {formatDistance(
+            addMinutes(subMinutes(time, time.getTimezoneOffset()), minutesFromUTC(clock ?? adminClock)),
+            addMinutes(subMinutes(new Date(date), time.getTimezoneOffset()), minutesFromUTC(adminClock)),
+            {
+              addSuffix: true,
+            }
+          )}
           </Text>
         </Flex>
         <Flex>
