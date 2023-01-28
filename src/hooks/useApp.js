@@ -8,6 +8,7 @@ const initial = {
   },
   clocks: [],
   openedClock: null,
+  clockIdForEvent: null,
   events: [],
   openedEvent: null,
   openFor: '', // clock or event
@@ -79,16 +80,16 @@ const useApp = () => {
     setState(oldState);
   };
 
-  const openModal = (openFor, id) => {
+  const openModal = (openFor, clockId, eventId) => {
     const oldState = JSON.parse(JSON.stringify(state));
 
     oldState.openFor = openFor;
     if (openFor === 'clock') {
-      if (id) {
-        if (id === 'admin') {
+      if (clockId) {
+        if (clockId === 'admin') {
           oldState.openedClock = oldState.adminClock;
         } else {
-          const index = oldState.clocks.findIndex((clock) => clock.id === id);
+          const index = oldState.clocks.findIndex((clock) => clock.id === clockId);
 
           if (index > -1) {
             oldState.openedClock = oldState.clocks[index];
@@ -96,8 +97,9 @@ const useApp = () => {
         }
       }
     } else {
-      if (id) {
-        const index = oldState.events.findIndex((event) => event.id === id);
+      oldState.clockIdForEvent = clockId;
+      if (eventId) {
+        const index = oldState.events.findIndex((event) => event.id === eventId);
 
         if (index > -1) {
           oldState.openedEvent = oldState.events[index];
@@ -114,6 +116,7 @@ const useApp = () => {
       openFor: '',
       openedClock: null,
       openedEvent: null,
+      clockIdForEvent: null
     }));
   };
 
@@ -130,6 +133,7 @@ const useApp = () => {
       ...prev,
       events: [...prev.events, newEvent],
       openFor: '',
+      clockIdForEvent: null
     }));
   };
 
@@ -146,14 +150,15 @@ const useApp = () => {
 
       oldState.openFor = ''; 
       oldState.openedEvent = null;
+      oldState.clockIdForEvent = null;
 
       setState(oldState);
     }
   };
 
-  const deleteEvent = (id) => {
+  const deleteEvent = (eventId) => {
     const oldState = JSON.parse(JSON.stringify(state));
-    const index = oldState.events.findIndex((event) => event.id === id);
+    const index = oldState.events.findIndex((event) => event.id === eventId);
 
     if (index > -1) {
       oldState.events.splice(index, 1);
