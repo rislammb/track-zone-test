@@ -15,11 +15,11 @@ const initial = {
 };
 
 const useApp = () => {
-  // const initialState = localStorage.getItem('FSA-CLOCK')
-  //   ? JSON.parse(localStorage.getItem('FSA-CLOCK'))
-  //   : initial;
+  const initialState = localStorage.getItem('FSA-CLOCK')
+   ? JSON.parse(localStorage.getItem('FSA-CLOCK'))
+   : initial;
 
-  const [state, setState] = useState(initial);
+  const [state, setState] = useState(initialState);
 
   const addClock = ({ title, timeZone, difference }) => {
     const newClock = {
