@@ -6,13 +6,13 @@ export const generateId = () => {
   return v4() + v4() + '-' + v4() + '-' + v4() + '-' + v4() + v4();
 };
 
-// export const addZeroFrist = (number) => {
- // return number > 9 ? `${number}` : `0${number}`;
-// };
-
-export const addMinutesFN = (dateObj, minutes) => {
-  return new Date(new Date(dateObj).getTime() + minutes * 60 * 1000);
+export const addZeroFrist = (number) => {
+  return number > 9 ? `${number}` : `0${number}`;
 };
+
+// export const addMinutesFN = (dateObj, minutes) => {
+//  return new Date(new Date(dateObj).getTime() + minutes * 60 * 1000);
+// };
 
 export const getHours = (hours) => {
   return hours === 0 ? 12 : hours > 12 ? hours - 12 : hours;
