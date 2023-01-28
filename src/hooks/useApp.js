@@ -75,6 +75,7 @@ const useApp = () => {
 
     if (index > -1) {
       oldState.clocks.splice(index, 1);
+      oldState.events.filter(event => event.clockId !== id);
     }
 
     setState(oldState);
