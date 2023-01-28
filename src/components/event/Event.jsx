@@ -1,4 +1,4 @@
-import { addMinutes, formatDistance, subMinutes } from 'date-fns';
+import { addMinutes, format, formatDistance, subMinutes } from 'date-fns';
 import { addZeroFrist, getAmPm, getHours, minutesFromUTC } from '../../utils';
 
 import Button from '../ui/Button';
@@ -15,7 +15,6 @@ const Event = ({
   deleteEvent,
 }) => {
   const time = new Date(event.datetime);
-  const [, day, month, year] = time.toUTCString().split(' ');
 
   return (
     <Flex fd={'column'}>
@@ -24,7 +23,7 @@ const Event = ({
       <Flex jc={'space-between'} ai={'center'}>
         <Flex fd={'column'}>
           <Text p={'0px'} size={'sm'}>
-            {`${day} ${month} ${year}`} -{' '}
+            {format(time, 'dd MMM yyyy')} -{' '}
             {addZeroFrist(getHours(time.getHours()))}:
             {addZeroFrist(time.getMinutes())} {getAmPm(time.getHours())}
           </Text>
