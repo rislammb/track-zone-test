@@ -87,7 +87,7 @@ const EventForm = ({
             <Button type='button' color={'warning'} onClick={closeModal}>
               Cancel
             </Button>
-            <Button type='submit'>{openedEvent ? 'Edit' : 'Add'}</Button>
+            <Button color={'primary'} type='submit'>{openedEvent ? 'Edit' : 'Add'}</Button>
           </Flex>
         </Form>
       </Card>
