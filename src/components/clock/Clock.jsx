@@ -25,11 +25,15 @@ const Clock = ({
 
   const [, day, month, year] = time.toUTCString().split(' ');
 
+  const deleteClockFn = () => {
+    if (window.confirm(`Are you want to delete: '${clock.title}'?`)) deleteClock(clock.id)
+  };
+
   return (
     <Card p={2} fb={'320px'} mw={'450px'} fg={'1'}>
       <Flex jc={'space-between'}>
         {clock ? (
-          <Button color={'danger'} onClick={() => deleteClock(clock.id)}>
+          <Button color={'danger'} onClick={deleteClockFn}>
             Delete
           </Button>
         ) : (
