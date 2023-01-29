@@ -17,6 +17,10 @@ const Event = ({
 }) => {
   const time = new Date(event.datetime);
 
+  const deleteEventFn = () => {
+    if (confirm(`Are you want to delete: '${event.title}'?`)) deleteEvent(event.id)
+  };
+
   return (
     <ListItem>
       <Text color={'warning'}>{event.title}</Text>
@@ -42,7 +46,7 @@ const Event = ({
         </Flex>
         <Flex>
           <Button
-            onClick={() => deleteEvent(event.id)}
+            onClick={deleteEventFn}
             fs={'0.85rem'}
             p={'0.2rem 0.6rem'}
             color={'danger'}
