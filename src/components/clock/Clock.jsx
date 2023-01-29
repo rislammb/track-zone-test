@@ -26,7 +26,7 @@ const Clock = ({
   const [, day, month, year] = time.toUTCString().split(' ');
 
   const deleteClockFn = () => {
-    if (window.confirm(`Are you want to delete: '${clock.title}'?`)) deleteClock(clock.id)
+    if (window.confirm(`Are you want to delete clock: '${clock.title}'?`)) deleteClock(clock.id)
   };
 
   return (
