@@ -65,9 +65,9 @@ const Clock = ({
       )}
       <Hr />
       <Flex jc={'space-between'} m={'0.25rem 0'} ai={'center'}>
-        <Title size={'sm'} style={{ borderBottom: '#4a4a4a' }}>Events:</Title>
+        <Text size={'lg'} style={{ borderBottom: '1px solid #4a4a4a' }}>Events:</Text>
         <Button onClick={() => openModal('event', clock ? clock.id : 'admin')}>
-          Add
+          Add Event
         </Button>
       </Flex>
 
