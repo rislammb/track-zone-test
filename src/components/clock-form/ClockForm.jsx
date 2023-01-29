@@ -1,3 +1,5 @@
+import timeDifferences from '../../data/timeDifferences';
+import timeZones from '../../data/timeZones';
 import useForm from '../../hooks/useForm';
 import InputGroup from '../shared/InputGroup';
 
@@ -5,15 +7,35 @@ import Button from '../ui/Button';
 import Card from '../ui/Card';
 import Flex from '../ui/Flex';
 import Form from '../ui/Form';
-import Modal from '../ui/Modal';
-import Title from '../ui/Title';
 import Label from '../ui/Label';
-
-import timeDifferences from '../../data/timeDifferences';
-import timeZones from '../../data/timeZones';
+import Modal from '../ui/Modal';
 import Option from '../ui/Option';
 import Select from '../ui/Select';
+import Title from '../ui/Title';
 
+/**
+ * Get initial state for form
+ * @param {object} openedClock
+ * @returns object
+ */
+const initial = (openedClock) =>
+  openedClock
+    ? {
+        title: openedClock.title,
+        timeZone: openedClock.timeZone,
+        difference: openedClock.difference,
+      }
+    : {
+        title: '',
+        timeZone: JSON.stringify({ title: 'UTC', minutes: 0 }),
+        difference: JSON.stringify({ title: '00:00', minutes: 0 }),
+      };
+
+/**
+ * Validate a form values
+ * @param {object} values
+ * @returns {{valid: boolean, errors: object}}
+ */
 const validate = (values) => {
   const errors = {};
   Object.keys(values).forEach((key) => {
@@ -32,20 +54,8 @@ const ClockForm = ({
   closeModal,
   openedClock,
 }) => {
-  const initial = openedClock
-    ? {
-        title: openedClock.title,
-        timeZone: openedClock.timeZone,
-        difference: openedClock.difference,
-      }
-    : {
-        title: '',
-        timeZone: JSON.stringify({ title: 'UTC', minutes: 0 }),
-        difference: JSON.stringify({ title: '00:00', minutes: 0 }),
-      };
-
   const { state, handleChange, handleFocus, handleBlur, handleSubmit } =
-    useForm(initial, validate);
+    useForm(initial(openedClock), validate);
 
   const submit = (values) => {
     if (openedClock) {
@@ -61,7 +71,7 @@ const ClockForm = ({
 
   return (
     <Modal>
-      <Card fb={'320px'} p={2}>
+      <Card fb={'320px'} p={2} bc={'#1a1a1a'}>
         <Title>{openedClock ? 'Edit Clock' : 'Add Clock'}</Title>
         <Form onSubmit={(e) => handleSubmit(e, submit)}>
           <InputGroup

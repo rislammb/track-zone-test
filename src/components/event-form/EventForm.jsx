@@ -8,8 +8,13 @@ import Form from '../ui/Form';
 import Modal from '../ui/Modal';
 import Title from '../ui/Title';
 
-const initial = (openedEvent) => {
-  return openedEvent
+/**
+ * Get initial state for form
+ * @param {object} openedEvent
+ * @returns object
+ */
+const initial = (openedEvent) =>
+  openedEvent
     ? {
         title: openedEvent.title,
         datetime: openedEvent.datetime,
@@ -18,8 +23,12 @@ const initial = (openedEvent) => {
         title: '',
         datetime: '',
       };
-};
 
+/**
+ * Validate a form values
+ * @param {object} values
+ * @returns {{valid: boolean, errors: object}}
+ */
 const validate = (values) => {
   const errors = {};
   Object.keys(values).forEach((key) => {
@@ -51,7 +60,7 @@ const EventForm = ({
 
   return (
     <Modal>
-      <Card p={2}>
+      <Card p={2} bc={'#1a1a1a'}>
         <Title size={'sm'}>{openedEvent ? 'Edit Event' : 'Add Event'}</Title>
         <Form onSubmit={(e) => handleSubmit(e, submit)}>
           <InputGroup

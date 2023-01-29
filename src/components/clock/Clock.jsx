@@ -7,6 +7,7 @@ import Button from '../ui/Button';
 import Card from '../ui/Card';
 import Flex from '../ui/Flex';
 import Hr from '../ui/Hr';
+import List from '../ui/List';
 import Span from '../ui/Span';
 import Text from '../ui/Text';
 import Title from '../ui/Title';
@@ -41,7 +42,7 @@ const Clock = ({
       <Title size={'xl'} color={'primary'}>
         {addZeroFrist(getHours(time.getUTCHours()))}:
         {addZeroFrist(time.getUTCMinutes())}
-        <Span fs={'24px'}>
+        <Span fs={'1.3rem'}>
           :{addZeroFrist(time.getUTCSeconds())} {getAmPm(time.getUTCHours())}
         </Span>
       </Title>
@@ -62,16 +63,15 @@ const Clock = ({
           )}
         </Text>
       )}
-      <br />
       <Hr />
-      <Flex jc={'space-between'} m={'8px 0px'} ai={'center'}>
+      <Flex jc={'space-between'} m={'0.25rem 0'} ai={'center'}>
         <Text>Events:</Text>
         <Button onClick={() => openModal('event', clock ? clock.id : 'admin')}>
           Add
         </Button>
       </Flex>
 
-      <Flex fd={'column'}>
+      <List>
         {events?.length > 0 &&
           events.map((event) => (
             <Event
@@ -85,7 +85,7 @@ const Clock = ({
               deleteEvent={deleteEvent}
             />
           ))}
-      </Flex>
+      </List>
     </Card>
   );
 };

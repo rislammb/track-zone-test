@@ -12,6 +12,7 @@ const Input = styled.input.attrs((props) => ({
   border: 1px solid #ff91b6;
   outline: none;
   border-radius: 3px;
+  background-color: inherit;
 
   /* here we use the dynamically computed prop */
   type: ${(props) => props.type};

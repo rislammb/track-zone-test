@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { generateId } from '../utils.js';
 
+// initial state object
 const initial = {
   adminClock: {
     title: 'Admin Clock',
@@ -15,13 +16,21 @@ const initial = {
   openFor: '', // clock or event
 };
 
+/**
+ * useApp hooks for App.jsx component
+ * @returns {object}
+ */
 const useApp = () => {
+  // set initial state from local storage
   const initialState = localStorage.getItem('FSA-CLOCK')
-   ? JSON.parse(localStorage.getItem('FSA-CLOCK'))
-   : initial;
-
+    ? JSON.parse(localStorage.getItem('FSA-CLOCK'))
+    : initial;
   const [state, setState] = useState(initialState);
 
+  /**
+   * Add a user defined clock to state
+   * @param {{ title: string, timeZone: string, difference: string }} clockInfo
+   */
   const addClock = ({ title, timeZone, difference }) => {
     const newClock = {
       id: generateId(),
@@ -37,6 +46,10 @@ const useApp = () => {
     }));
   };
 
+  /**
+   * Edit admin clock
+   * @param {{ title: string | undefined, timeZone: string| undefined, difference: string| undefined }} clockInfo
+   */
   const editAdminClock = ({ title, timeZone, difference }) => {
     if (title || timeZone || difference) {
       const oldState = JSON.parse(JSON.stringify(state));
@@ -52,6 +65,11 @@ const useApp = () => {
     }
   };
 
+  /**
+   * Edit user defined clock
+   * @param {string} id
+   * @param {{ title: string | undefined, timeZone: string| undefined, difference: string| undefined }} clockInfo
+   */
   const editClock = (id, { title, timeZone, difference }) => {
     if (title || timeZone || difference) {
       const oldState = JSON.parse(JSON.stringify(state));
@@ -69,18 +87,28 @@ const useApp = () => {
     }
   };
 
+  /**
+   * Delete user defined clock and clock related event
+   * @param {string} id
+   */
   const deleteClock = (id) => {
     const oldState = JSON.parse(JSON.stringify(state));
     const index = oldState.clocks.findIndex((clock) => clock.id === id);
 
     if (index > -1) {
       oldState.clocks.splice(index, 1);
-      oldState.events.filter((event) => event.clockId !== id);
+      oldState.events = oldState.events.filter((event) => event.clockId !== id);
     }
 
     setState(oldState);
   };
 
+  /**
+   * Open modal for clock or event and for add new or edit
+   * @param {string} openFor
+   * @param {string | undefined} clockId
+   * @param {string | undefined} eventId
+   */
   const openModal = (openFor, clockId, eventId) => {
     const oldState = JSON.parse(JSON.stringify(state));
 
@@ -115,6 +143,9 @@ const useApp = () => {
     setState(oldState);
   };
 
+  /**
+   * Close modal
+   */
   const closeModal = () => {
     setState((prev) => ({
       ...prev,
@@ -125,6 +156,11 @@ const useApp = () => {
     }));
   };
 
+  /**
+   * Add a event to state with clock id
+   * @param {string} clockId
+   * @param {{ title: string, datetime: string  }} eventInfo
+   */
   const addEvent = (clockId, { title, datetime }) => {
     const newEvent = {
       clockId,
@@ -141,6 +177,11 @@ const useApp = () => {
     }));
   };
 
+  /**
+   * Edit a event
+   * @param {string} id
+   * @param {{ title: string | undefined, datetime: string | undefined  }} eventInfo
+   */
   const editEvent = (id, { title, datetime }) => {
     if (title || datetime) {
       const oldState = JSON.parse(JSON.stringify(state));
@@ -159,6 +200,10 @@ const useApp = () => {
     }
   };
 
+  /**
+   * Delete a event from state
+   * @param {string} eventId
+   */
   const deleteEvent = (eventId) => {
     const oldState = JSON.parse(JSON.stringify(state));
     const index = oldState.events.findIndex((event) => event.id === eventId);
@@ -170,6 +215,9 @@ const useApp = () => {
     setState(oldState);
   };
 
+  /**
+   * If any change on state, save state to local storage
+   */
   useEffect(() => {
     localStorage.setItem('FSA-CLOCK', JSON.stringify(state));
   }, [state]);

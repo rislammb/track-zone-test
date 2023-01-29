@@ -11,7 +11,7 @@ const Modal = styled.div`
   justify-content: center;
   align-items: ${(props) => props.ai ?? 'start'};
   z-index: 2;
-  background: rgba(155, 155, 155, 0.85);
+  background: rgba(77, 77, 77, 0.85);
 `;
 
 export default Modal;

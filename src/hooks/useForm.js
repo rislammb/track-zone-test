@@ -1,9 +1,22 @@
-import { useState } from 'react'; 
+import { useState } from 'react';
 
+/**
+ * @callback validateCallback
+ * @param {object} values
+ * @returns {{valid: boolean, errors: object}}
+ */
+
+/**
+ *
+ * @param {object} initial
+ * @param {validateCallback} validate
+ * @returns {object}
+ */
 const useForm = (initial, validate) => {
   const [state, setState] = useState(mapObjToState(initial));
 
-  const handleChange = e => {
+  // change handler for input
+  const handleChange = (e) => {
     const { name, value } = e.target;
     const oldState = JSON.parse(JSON.stringify(state));
 
@@ -13,7 +26,8 @@ const useForm = (initial, validate) => {
     setState(oldState);
   };
 
-  const handleFocus = e => {
+  // focus handler for input
+  const handleFocus = (e) => {
     const { name } = e.target;
     const oldState = JSON.parse(JSON.stringify(state));
 
@@ -23,7 +37,8 @@ const useForm = (initial, validate) => {
     setState(oldState);
   };
 
-  const handleBlur = e => {
+  // blur handler for input
+  const handleBlur = (e) => {
     const { name } = e.target;
     const oldState = JSON.parse(JSON.stringify(state));
     oldState[name].focused = false;
@@ -37,6 +52,7 @@ const useForm = (initial, validate) => {
     setState(oldState);
   };
 
+  // submit handler for input
   const handleSubmit = (e, cb) => {
     e.preventDefault();
 
@@ -48,20 +64,25 @@ const useForm = (initial, validate) => {
     if (valid) {
       cb(values);
     } else {
-      Object.keys(errors).forEach(key => {
-        oldState[key].error = errors[key]
+      Object.keys(errors).forEach((key) => {
+        oldState[key].error = errors[key];
       });
 
       setState(oldState);
     }
   };
 
-  return { state, handleChange, handleFocus, handleBlur, handleSubmit } 
-}
+  return { state, handleChange, handleFocus, handleBlur, handleSubmit };
+};
 
-export default useForm; 
+export default useForm;
 
-const mapObjToState = obj => {
+/**
+ * Receive a object of input items with value and return state object
+ * @param {object} obj
+ * @returns {object} state
+ */
+const mapObjToState = (obj) => {
   return Object.keys(obj).reduce((acc, key) => {
     acc[key] = {
       name: key,
@@ -71,14 +92,19 @@ const mapObjToState = obj => {
       focused: false,
     };
 
-    return acc; 
+    return acc;
   }, {});
 };
 
-const mapStateToValues = state => {
+/**
+ * Receive a state object and return object with value
+ * @param {object} state
+ * @returns {object} values
+ */
+const mapStateToValues = (state) => {
   return Object.keys(state).reduce((acc, key) => {
     acc[key] = state[key].value;
 
-    return acc; 
+    return acc;
   }, {});
 };

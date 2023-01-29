@@ -23,11 +23,13 @@ const App = () => {
   } = useApp();
   const [date, setDate] = useState(new Date().toUTCString());
 
+  // Set a clock interval in use effect for time
   useEffect(() => {
     const intervalId = setInterval(() => {
       setDate(new Date().toUTCString());
     }, 1000);
 
+    // clear clock interval
     return () => {
       clearInterval(intervalId);
     };
@@ -35,10 +37,10 @@ const App = () => {
 
   return (
     <div className='app'>
-      <Title color={'primary'} size={'lg'} p={'12px 8px'}>
+      <Title color={'primary'} size={'lg'} style={{ marginBottom: '0.8rem' }}>
         FSA Track Zone
       </Title>
-      <Flex ai={'start'}>
+      <Flex ai={'start'} gap={'1rem'}>
         <Clock
           adminClock={state.adminClock}
           date={date}
@@ -47,12 +49,16 @@ const App = () => {
           events={state.events?.filter((event) => event.clockId === 'admin')}
           deleteEvent={deleteEvent}
         />
-        <Button fs={'18px'} p={'8px 24px'} onClick={() => openModal('clock')}>
+        <Button
+          fs={'1.1rem'}
+          p={'0.4rem 1.3rem'}
+          onClick={() => openModal('clock')}
+        >
           Add Clock
         </Button>
       </Flex>
       <br />
-      <Flex gap={'16px'}>
+      <Flex gap={'1rem'}>
         {state.clocks.length > 0 &&
           state.clocks.map((clock) => (
             <Clock
@@ -61,7 +67,6 @@ const App = () => {
               clock={clock}
               date={date}
               openModal={openModal}
-              closeModal={closeModal}
               deleteClock={deleteClock}
               events={state.events?.filter(
                 (event) => event.clockId === clock.id

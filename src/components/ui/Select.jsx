@@ -8,6 +8,7 @@ const Select = styled.select`
   border-radius: 3px;
   padding: ${(props) => props.p ?? '4px 8px'};
   margin: ${(props) => props.m ?? ''};
+  background-color: inherit;
 `;
 
 export default Select;

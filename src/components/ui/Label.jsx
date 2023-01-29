@@ -9,7 +9,7 @@ const sizes = {
 const colors = {
   primary: '#59acff',
   warning: '#ddff1a',
-  danger: '#ff571f',
+  danger: '#ff5353',
 };
 
 const Label = styled.label`
