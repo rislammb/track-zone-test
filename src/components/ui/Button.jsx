@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const colors = {
   primary: '#59acff',
   warning: '#ddff1a',
-  danger: '#ff5353',
+  danger: '#ff6363',
 };
 
 const Button = styled.button`
