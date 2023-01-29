@@ -18,7 +18,7 @@ const Event = ({
   const time = new Date(event.datetime);
 
   const deleteEventFn = () => {
-    if (window.confirm(`Are you want to delete: \'${event.title}\'?`)) deleteEvent(event.id)
+    if (window.confirm(`Are you want to delete: '${event.title}'?`)) deleteEvent(event.id)
   };
 
   return (
