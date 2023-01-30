@@ -1,24 +1,32 @@
 import { useState } from 'react';
+import {
+  deepClone,
+  mapFormInputsToState,
+  mapFormStateToValues,
+} from '../utils';
 
 /**
  * @callback validateCallback
  * @param {object} values
- * @returns {{valid: boolean, errors: object}}
+ * @returns {{valid: boolean, errors: object}} validation info
  */
 
 /**
- *
+ * Receive initial input values for a form and return state and other functionalities
  * @param {object} initial
  * @param {validateCallback} validate
- * @returns {object}
+ * @returns {object} state and other functionalities for form
  */
 const useForm = (initial, validate) => {
-  const [state, setState] = useState(mapObjToState(initial));
+  const [state, setState] = useState(mapFormInputsToState(initial));
 
-  // change handler for input
+  /**
+   * Change handler for input field
+   * @param {object} e
+   */
   const handleChange = (e) => {
     const { name, value } = e.target;
-    const oldState = JSON.parse(JSON.stringify(state));
+    const oldState = deepClone(state);
 
     oldState[name].error = '';
     oldState[name].value = value;
@@ -26,10 +34,13 @@ const useForm = (initial, validate) => {
     setState(oldState);
   };
 
-  // focus handler for input
+  /**
+   * Focus handler for input field
+   * @param {object} e
+   */
   const handleFocus = (e) => {
     const { name } = e.target;
-    const oldState = JSON.parse(JSON.stringify(state));
+    const oldState = deepClone(state);
 
     oldState[name].touched = true;
     oldState[name].focused = true;
@@ -37,13 +48,17 @@ const useForm = (initial, validate) => {
     setState(oldState);
   };
 
-  // blur handler for input
+  /**
+   * Blur handler for input field
+   * @param {object} e
+   */
   const handleBlur = (e) => {
     const { name } = e.target;
-    const oldState = JSON.parse(JSON.stringify(state));
+    const oldState = deepClone(state);
+
     oldState[name].focused = false;
 
-    const { errors } = validate(mapStateToValues(oldState));
+    const { errors } = validate(mapFormStateToValues(oldState));
 
     if (errors[name] && oldState[name].touched) {
       oldState[name].error = errors[name];
@@ -52,13 +67,21 @@ const useForm = (initial, validate) => {
     setState(oldState);
   };
 
-  // submit handler for input
+  /**
+   * @callback submitCallback
+   * @param {object} values
+   */
+
+  /**
+   * Submit handler for a form
+   * @param {object} e
+   * @param {submitCallback} cb
+   */
   const handleSubmit = (e, cb) => {
     e.preventDefault();
+    const oldState = deepClone(state);
 
-    const oldState = JSON.parse(JSON.stringify(state));
-
-    const values = mapStateToValues(oldState);
+    const values = mapFormStateToValues(oldState);
     const { valid, errors } = validate(values);
 
     if (valid) {
@@ -76,35 +99,3 @@ const useForm = (initial, validate) => {
 };
 
 export default useForm;
-
-/**
- * Receive a object of input items with value and return state object
- * @param {object} obj
- * @returns {object} state
- */
-const mapObjToState = (obj) => {
-  return Object.keys(obj).reduce((acc, key) => {
-    acc[key] = {
-      name: key,
-      value: obj[key],
-      error: '',
-      touched: false,
-      focused: false,
-    };
-
-    return acc;
-  }, {});
-};
-
-/**
- * Receive a state object and return object with value
- * @param {object} state
- * @returns {object} values
- */
-const mapStateToValues = (state) => {
-  return Object.keys(state).reduce((acc, key) => {
-    acc[key] = state[key].value;
-
-    return acc;
-  }, {});
-};

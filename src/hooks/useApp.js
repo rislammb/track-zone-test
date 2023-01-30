@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { generateId } from '../utils.js';
+import { deepClone, generateId } from '../utils.js';
 
-// initial state object
+// Initial state object for app
 const initial = {
   adminClock: {
     title: 'Admin Clock',
@@ -18,13 +18,14 @@ const initial = {
 
 /**
  * useApp hooks for App.jsx component
- * @returns {object}
+ * @returns {object} state and other functionalities
  */
 const useApp = () => {
-  // set initial state from local storage
+  // Get initial state data from local storage or initial object
   const initialState = localStorage.getItem('FSA-CLOCK')
     ? JSON.parse(localStorage.getItem('FSA-CLOCK'))
     : initial;
+
   const [state, setState] = useState(initialState);
 
   /**
@@ -52,7 +53,7 @@ const useApp = () => {
    */
   const editAdminClock = ({ title, timeZone, difference }) => {
     if (title || timeZone || difference) {
-      const oldState = JSON.parse(JSON.stringify(state));
+      const oldState = deepClone(state);
 
       if (title) oldState.adminClock.title = title;
       if (timeZone) oldState.adminClock.timeZone = timeZone;
@@ -72,7 +73,8 @@ const useApp = () => {
    */
   const editClock = (id, { title, timeZone, difference }) => {
     if (title || timeZone || difference) {
-      const oldState = JSON.parse(JSON.stringify(state));
+      const oldState = deepClone(state);
+
       const index = oldState.clocks.findIndex((clock) => clock.id === id);
 
       if (index > -1) {
@@ -92,7 +94,8 @@ const useApp = () => {
    * @param {string} id
    */
   const deleteClock = (id) => {
-    const oldState = JSON.parse(JSON.stringify(state));
+    const oldState = deepClone(state);
+
     const index = oldState.clocks.findIndex((clock) => clock.id === id);
 
     if (index > -1) {
@@ -110,7 +113,7 @@ const useApp = () => {
    * @param {string | undefined} eventId
    */
   const openModal = (openFor, clockId, eventId) => {
-    const oldState = JSON.parse(JSON.stringify(state));
+    const oldState = deepClone(state);
 
     oldState.openFor = openFor;
     if (openFor === 'clock') {
@@ -178,13 +181,14 @@ const useApp = () => {
   };
 
   /**
-   * Edit a event
+   * Edit a event on clock
    * @param {string} id
    * @param {{ title: string | undefined, datetime: string | undefined  }} eventInfo
    */
   const editEvent = (id, { title, datetime }) => {
     if (title || datetime) {
-      const oldState = JSON.parse(JSON.stringify(state));
+      const oldState = deepClone(state);
+
       const index = oldState.events.findIndex((event) => event.id === id);
 
       if (index > -1) {
@@ -205,7 +209,8 @@ const useApp = () => {
    * @param {string} eventId
    */
   const deleteEvent = (eventId) => {
-    const oldState = JSON.parse(JSON.stringify(state));
+    const oldState = deepClone(state);
+
     const index = oldState.events.findIndex((event) => event.id === eventId);
 
     if (index > -1) {

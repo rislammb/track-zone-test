@@ -9,9 +9,9 @@ import Modal from '../ui/Modal';
 import Title from '../ui/Title';
 
 /**
- * Get initial state for form
+ * Set initial item and value for form
  * @param {object} openedEvent
- * @returns object
+ * @returns {object} initial item and value
  */
 const initial = (openedEvent) =>
   openedEvent
@@ -27,7 +27,7 @@ const initial = (openedEvent) =>
 /**
  * Validate a form values
  * @param {object} values
- * @returns {{valid: boolean, errors: object}}
+ * @returns {{valid: boolean, errors: object}} validation info
  */
 const validate = (values) => {
   const errors = {};
@@ -40,6 +40,7 @@ const validate = (values) => {
   return { valid: Object.keys(errors).length === 0, errors };
 };
 
+// Form component for add or edit event
 const EventForm = ({
   clockId,
   addEvent,
@@ -50,6 +51,10 @@ const EventForm = ({
   const { state, handleChange, handleFocus, handleBlur, handleSubmit } =
     useForm(initial(openedEvent), validate);
 
+  /**
+   * Finally submit form values
+   * @param {object} values
+   */
   const submit = (values) => {
     if (openedEvent) {
       editEvent(openedEvent.id, { ...values });
@@ -87,7 +92,9 @@ const EventForm = ({
             <Button type='button' color={'warning'} onClick={closeModal}>
               Cancel
             </Button>
-            <Button color={'primary'} type='submit'>{openedEvent ? 'Edit' : 'Add'}</Button>
+            <Button color={'primary'} type='submit'>
+              {openedEvent ? 'Edit' : 'Add'}
+            </Button>
           </Flex>
         </Form>
       </Card>

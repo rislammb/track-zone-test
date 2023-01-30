@@ -14,9 +14,9 @@ import Select from '../ui/Select';
 import Title from '../ui/Title';
 
 /**
- * Get initial state for form
+ * Set initial item and value for form
  * @param {object} openedClock
- * @returns object
+ * @returns {object} initial item and value
  */
 const initial = (openedClock) =>
   openedClock
@@ -34,7 +34,7 @@ const initial = (openedClock) =>
 /**
  * Validate a form values
  * @param {object} values
- * @returns {{valid: boolean, errors: object}}
+ * @returns {{valid: boolean, errors: object}} validation info
  */
 const validate = (values) => {
   const errors = {};
@@ -47,6 +47,7 @@ const validate = (values) => {
   return { valid: Object.keys(errors).length === 0, errors };
 };
 
+// Form component for add or edit clock
 const ClockForm = ({
   addClock,
   editAdminClock,
@@ -57,6 +58,10 @@ const ClockForm = ({
   const { state, handleChange, handleFocus, handleBlur, handleSubmit } =
     useForm(initial(openedClock), validate);
 
+  /**
+   * Finally submit form values
+   * @param {object} values
+   */
   const submit = (values) => {
     if (openedClock) {
       if (openedClock.id) {

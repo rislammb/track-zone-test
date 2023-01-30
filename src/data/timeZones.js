@@ -8,12 +8,16 @@ const timeZones = [
     value: { title: 'GMT', minutes: 0 },
   },
   {
-    name: 'IST',
-    value: { title: 'IST', minutes: 5 * 60 + 30 },
+    name: 'EST',
+    value: { title: 'EST', minutes: -(5 * 60) },
   },
   {
     name: 'PST',
     value: { title: 'PST', minutes: -(8 * 60) },
+  },
+  {
+    name: 'IST',
+    value: { title: 'IST', minutes: 5 * 60 + 30 },
   },
 ];
 

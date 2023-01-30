@@ -6,19 +6,22 @@ import Flex from '../ui/Flex';
 import ListItem from '../ui/ListItem';
 import Text from '../ui/Text';
 
+// Event component for each single event
 const Event = ({
   clockId,
   adminClock,
   clock,
-  date,
+  appDateTime,
   event,
   openModal,
   deleteEvent,
 }) => {
   const time = new Date(event.datetime);
 
+  // Click handler for delete event button
   const deleteEventFn = () => {
-    if (window.confirm(`Are you want to delete event: '${event.title}'?`)) deleteEvent(event.id)
+    if (window.confirm(`Are you want to delete event: '${event.title}'?`))
+      deleteEvent(event.id);
   };
 
   return (
@@ -26,7 +29,7 @@ const Event = ({
       <Text color={'warning'}>{event.title}</Text>
       <Flex jc={'space-between'} ai={'center'}>
         <Flex fd={'column'} gap={'0.05rem'}>
-          <Text p={'0px'} size={'sm'}>
+          <Text size={'sm'}>
             {format(time, 'dd MMM yyyy')} -{' '}
             {addZeroFrist(getHours(time.getHours()))}:
             {addZeroFrist(time.getMinutes())} {getAmPm(time.getHours())}
@@ -37,7 +40,7 @@ const Event = ({
                 subMinutes(time, time.getTimezoneOffset()),
                 minutesFromUTC(clock ?? adminClock)
               ),
-              new Date(date),
+              new Date(appDateTime),
               {
                 addSuffix: true,
               }

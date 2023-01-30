@@ -12,8 +12,9 @@ import Span from '../ui/Span';
 import Text from '../ui/Text';
 import Title from '../ui/Title';
 
+// Clock component for each single clock
 const Clock = ({
-  date,
+  appDateTime,
   adminClock,
   clock,
   openModal,
@@ -21,12 +22,19 @@ const Clock = ({
   events,
   deleteEvent,
 }) => {
-  const time = addMinutes(new Date(date), minutesFromUTC(clock ?? adminClock));
+  // Time from app datetime based on clock time zone
+  const time = addMinutes(
+    new Date(appDateTime),
+    minutesFromUTC(clock ?? adminClock)
+  );
 
+  // Array destructure day month and from UTC string
   const [, day, month, year] = time.toUTCString().split(' ');
 
+  // Click handler for delete clock button
   const deleteClockFn = () => {
-    if (window.confirm(`Are you want to delete clock: '${clock.title}'?`)) deleteClock(clock.id)
+    if (window.confirm(`Are you want to delete clock: '${clock.title}'?`))
+      deleteClock(clock.id);
   };
 
   return (
@@ -59,8 +67,8 @@ const Clock = ({
       {clock && (
         <Text size={'sm'} ta={'center'} color={'secondary'}>
           {formatDistance(
-            addMinutes(new Date(date), minutesFromUTC(adminClock)),
-            addMinutes(new Date(date), minutesFromUTC(clock)),
+            addMinutes(new Date(appDateTime), minutesFromUTC(adminClock)),
+            addMinutes(new Date(appDateTime), minutesFromUTC(clock)),
             {
               addSuffix: true,
             }
@@ -69,7 +77,13 @@ const Clock = ({
       )}
       <Hr />
       <Flex jc={'space-between'} m={'0.25rem 0'} ai={'center'}>
-        {events?.length > 0 ? <Text size={'lg'} style={{ borderBottom: '1px solid #4a4a4a' }}>Events:</Text> : <span></span>}
+        {events?.length > 0 ? (
+          <Text size={'lg'} style={{ borderBottom: '1px solid #4a4a4a' }}>
+            Events:
+          </Text>
+        ) : (
+          <span></span>
+        )}
         <Button onClick={() => openModal('event', clock ? clock.id : 'admin')}>
           Add Event
         </Button>
@@ -82,7 +96,7 @@ const Clock = ({
               clockId={clock ? clock.id : 'admin'}
               adminClock={adminClock}
               clock={clock}
-              date={date}
+              appDateTime={appDateTime}
               key={event.id}
               event={event}
               openModal={openModal}
