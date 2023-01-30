@@ -1,6 +1,10 @@
 # Track Zone App
 
-Made by following 'Stack Learner' youtube channel.
+Made by following 'Full Stack Amry' playlist in 'Stack Learner' youtube channel.
+
+## For open live
+
+[Click](https://fsa-track-zone.netlify.app/)
 
 ## Requirements
 
@@ -20,10 +24,6 @@ Made by following 'Stack Learner' youtube channel.
 - A proper breakdown of the requirements
 - Component Tree and Data Flow
 - Finally, Proper use of components and custom hooks
-
-## For open live
-
-[click](https://fsa-track-zone.netlify.app/)
 
 ## Data Structure
 
